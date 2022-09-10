@@ -1,9 +1,14 @@
 package com.example.bitbd
 
-import android.content.Intent
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bitbd.databinding.ActivityLogInBinding
+import com.example.bitbd.util.BitBDUtil
+
+import kotlinx.coroutines.GlobalScope
+
+import kotlinx.coroutines.launch
 
 class LogInActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLogInBinding
@@ -13,8 +18,8 @@ class LogInActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loginButton.setOnClickListener {
-            val intent = Intent(this@LogInActivity, MainActivity::class.java)
-            startActivity(intent)
+            BitBDUtil.showProgress(this@LogInActivity)
         }
     }
+
 }
