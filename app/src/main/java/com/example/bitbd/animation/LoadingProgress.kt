@@ -23,7 +23,7 @@ class  LoadingProgress(context: Context) : Dialog(context) {
         binding = CustomDialogLoadingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if(BitBDPreferences(context).getAuthToken().isNullOrEmpty()){
-            binding.animationViewContainer.setBackgroundColor(ContextCompat.getColor(context, android.R.color.transparent));
+            binding.animationView.setAnimation(R.raw.anim_loader)
         }
         else binding.animationView.setAnimation(R.raw.others_load)
 

@@ -4,9 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import com.example.bitbd.constant.*
-import com.example.bitbd.network.ApiClient
-import com.example.bitbd.network.RetrofitApiCallCreation
-import com.example.bitbd.network.RetrofitApiCallCreation.setApiAuthClient
 
 
 class BitBDPreferences(context: Context) {
@@ -22,16 +19,9 @@ class BitBDPreferences(context: Context) {
         editor.putString(AUTH_TOKEN, newToken)
         Log.d(PREFERENCE_TITLE, "putAuthToken: $newToken")
         editor.apply()
-        if(token.isNullOrEmpty()){
-            RetrofitApiCallCreation.setSession(false)
-            return
-        }
-        setAuthClient()
     }
 
-    private fun setAuthClient(){
-        ApiClient().getAuthApiClient(contextVal)?.let { setApiAuthClient(it) }
-    }
+
 
     fun getAuthToken(): String? {
         Log.d(PREFERENCE_TITLE, "getAuthToken: ${preferences.getString(AUTH_TOKEN, "")}")
@@ -76,7 +66,6 @@ class BitBDPreferences(context: Context) {
         editor.remove(AUTH_TOKEN)
         editor.remove(NAME)
         editor.apply()
-        RetrofitApiCallCreation.setSession(false)
     }
 
     companion object {

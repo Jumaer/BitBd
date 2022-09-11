@@ -57,18 +57,14 @@ object BitBDUtil {
     }
 
     private var loadingProgress : LoadingProgress? = null
-    fun showProgress(context: Context){
+    fun showProgress(context: Context) : LoadingProgress{
         loadingProgress = LoadingProgress(context)
         loadingProgress?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         loadingProgress!!.show()
-    }
-    fun hideProgress(){
-        if(loadingProgress!=null){
-            loadingProgress?.hide()
-            loadingProgress = null
-        }
 
+        return loadingProgress as LoadingProgress
     }
+
 
 
 }

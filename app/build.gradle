@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("kotlin-parcelize")
+
 }
 
 android {
@@ -20,13 +22,13 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            buildConfigField("String", "SERVER_URL", "\"https://\"") // Live
+            buildConfigField("String", "SERVER_URL", "\"https://new.apps.piit.us/bitbd/\"") // Live
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
         }
 
         debug {
-            buildConfigField("String", "SERVER_URL", "\"https://\"") // Live
+            buildConfigField("String", "SERVER_URL", "\"https://new.apps.piit.us/bitbd/\"") // Live
         }
 
         applicationVariants.all{
