@@ -1,4 +1,4 @@
-package com.example.bitbd.ui.withdraw_money
+package com.example.bitbd.ui.fragment.transaction
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
-import com.example.bitbd.R
+import androidx.lifecycle.lifecycleScope
+import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.databinding.FragmentTransactionBinding
-import com.example.bitbd.databinding.FragmentWithdrawBinding
-import com.example.bitbd.ui.transaction.TransactionViewModel
+import com.example.bitbd.util.BitBDUtil
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,14 +20,14 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [WithdrawFragment.newInstance] factory method to
+ * Use the [TransactionFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class WithdrawFragment : Fragment() {
+class TransactionFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var _binding: FragmentWithdrawBinding? = null
+    private var _binding: FragmentTransactionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -44,17 +45,44 @@ class WithdrawFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        val withdrawViewModel =
-            ViewModelProvider(this).get(WithdrawViewModel::class.java)
+        val viewModel =
+            ViewModelProvider(this).get(TransactionViewModel::class.java)
 
-        _binding = FragmentWithdrawBinding.inflate(inflater, container, false)
+        _binding = FragmentTransactionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textWithdraw
-        withdrawViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textTransaction
+        viewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        getExpectedData(viewModel)
         return root
+    }
+
+    private fun getExpectedData(viewModel: TransactionViewModel) {
+
+        var loading : LoadingProgress? = null
+
+        viewModel.progress.observe(viewLifecycleOwner){
+            if(it != null){
+                if(it) {
+                    loading =  BitBDUtil.showProgress(requireContext())
+                }
+                else loading?.dismiss()
+            }
+        }
+
+        viewModel.baseTransaction.observe(viewLifecycleOwner){
+            if(it != null){
+                BitBDUtil.showMessage(it.message.toString(), requireContext())
+                loading?.dismiss()
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.baseTransactionCall(requireContext())
+        }
     }
 
     companion object {
@@ -64,12 +92,12 @@ class WithdrawFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment WithdrawFragment.
+         * @return A new instance of fragment TransactionFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            WithdrawFragment().apply {
+            TransactionFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

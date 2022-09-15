@@ -7,29 +7,29 @@
 
     <fragment
         android:id="@+id/nav_dashboard"
-        android:name="com.example.bitbd.ui.home.HomeFragment"
+        android:name="com.example.bitbd.ui.fragment.home.HomeFragment"
         android:label="@string/menu_dashboard"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.bitbd.ui.profile.ProfileFragment"
+        android:name="com.example.bitbd.ui.fragment.profile.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_deposit"
-        android:name="com.example.bitbd.ui.deposit.DepositFragment"
+        android:name="com.example.bitbd.ui.fragment.deposit.DepositFragment"
         android:label="@string/menu_deposit"
         tools:layout="@layout/fragment_deposit" />
     <fragment
         android:id="@+id/nav_transaction"
-        android:name="com.example.bitbd.ui.transaction.TransactionFragment"
+        android:name="com.example.bitbd.ui.fragment.transaction.TransactionFragment"
         android:label="@string/menu_transaction"
         tools:layout="@layout/fragment_transaction" />
     <fragment
         android:id="@+id/nav_withdraw"
-        android:name="com.example.bitbd.ui.withdraw_money.WithdrawFragment"
+        android:name="com.example.bitbd.ui.fragment.withdraw_money.WithdrawFragment"
         android:label="@string/menu_withdraw"
         tools:layout="@layout/fragment_withdraw" />
 </navigation>

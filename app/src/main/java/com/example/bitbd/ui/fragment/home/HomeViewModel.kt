@@ -1,13 +1,13 @@
-package com.example.bitbd.ui.withdraw_money
+package com.example.bitbd.ui.fragment.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class WithdrawViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is withdraw Fragment"
+        value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
 }

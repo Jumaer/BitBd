@@ -7,20 +7,17 @@ import com.example.bitbd.constant.*
 
 
 class BitBDPreferences(context: Context) {
-    private val contextVal = context
+
     private val preferences: SharedPreferences =
         context.getSharedPreferences(PREFERENCE_TITLE, Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = preferences.edit()
 
     fun putAuthToken(token: String?) {
         Log.d(PREFERENCE_TITLE, "putAuthToken: $token")
-        var newToken = token?.drop(2)
-        newToken = newToken?.dropLast(1)
-        editor.putString(AUTH_TOKEN, newToken)
-        Log.d(PREFERENCE_TITLE, "putAuthToken: $newToken")
+        editor.putString(AUTH_TOKEN, token)
+        Log.d(PREFERENCE_TITLE, "putAuthToken: $token")
         editor.apply()
     }
-
 
 
     fun getAuthToken(): String? {
@@ -66,6 +63,11 @@ class BitBDPreferences(context: Context) {
         editor.remove(AUTH_TOKEN)
         editor.remove(NAME)
         editor.apply()
+    }
+
+    fun putStringSet(prefKeyCookies: String, cookies: HashSet<String>) {
+
+
     }
 
     companion object {

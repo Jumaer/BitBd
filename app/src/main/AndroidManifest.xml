@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.bitbd">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:name=".constant.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,10 +17,13 @@
         android:theme="@style/Theme.BitBd"
         tools:targetApi="31">
         <activity
-            android:theme="@style/Theme.BitBd.NoActionBar"
+            android:name=".ui.activity.notification.NotificationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.login.LogInActivity"
-            android:label="@string/app_name"
             android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.BitBd.NoActionBar"
             tools:ignore="RedundantLabel">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +34,7 @@
         <activity
             android:name=".ui.activity.main.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.BitBd.NoActionBar"/>
-
+            android:theme="@style/Theme.BitBd.NoActionBar" />
     </application>
 
 </manifest>

@@ -12,6 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l" tools:ignore="ObsoleteSdkInt">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name ="android:colorBackground">#FDFDFD</item>
+        <item name="android:windowBackground">#FDFDFD</item>
+
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="navigationIconTint">@color/white</item>
+        <item name="fontFamily">@font/roboto2</item>
     </style>
 
     <style name="Theme.BitBd.NoActionBar">

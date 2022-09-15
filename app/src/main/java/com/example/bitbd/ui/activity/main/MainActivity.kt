@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -21,6 +22,7 @@ import com.example.bitbd.sharedPref.BitBDPreferences
 import com.example.bitbd.ui.activity.login.LogInActivity
 import com.example.bitbd.ui.activity.login.LogInViewModel
 import com.example.bitbd.ui.activity.main.mainViewModel.MainViewModel
+import com.example.bitbd.ui.activity.notification.NotificationActivity
 import com.example.bitbd.util.BitBDUtil
 
 class MainActivity : AppCompatActivity() {
@@ -58,12 +60,25 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_notice -> {
+                // Action goes here
+                startActivity(Intent(this@MainActivity, NotificationActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -74,20 +89,15 @@ class MainActivity : AppCompatActivity() {
     fun logOutFromApplication(item: MenuItem) {
         var loading : LoadingProgress? = null
 
-        viewModel.progress.observe(this){
+        viewModel.progressLogOut.observe(this){
             if(it != null){
                 if(it) {
                   loading =  BitBDUtil.showProgress(this@MainActivity)
                 }
-                else loading?.dismiss()
-            }
-        }
-
-        viewModel.userLogOut.observe(this){
-            if(it != null){
-                BitBDUtil.showMessage(it.get("message").toString(), this@MainActivity)
-                loading?.dismiss()
-                redirectToLogIn()
+                else {
+                    loading?.dismiss()
+                    redirectToLogIn()
+                }
             }
         }
 
@@ -97,6 +107,5 @@ class MainActivity : AppCompatActivity() {
     private fun redirectToLogIn() {
         preference.logOut()
         startActivity(Intent(this@MainActivity,LogInActivity::class.java))
-        finish()
     }
 }

@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.2165" />
+        <entry key="app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.226" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2165" />
         <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.21887550200803213" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.340625" />
+        <entry key="app/src/main/res/layout/activity_notification.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/custom_dialog_loading.xml" value="0.3229166666666667" />
@@ -21,6 +23,7 @@
         <entry key="app/src/main/res/layout/fragment_withdraw.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.340625" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.340625" />
+        <entry key="app/src/main/res/menu/main.xml" value="0.35625" />
       </map>
     </option>
   </component>

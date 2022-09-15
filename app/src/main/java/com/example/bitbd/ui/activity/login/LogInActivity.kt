@@ -86,6 +86,7 @@ class LogInActivity : AppCompatActivity() {
         loginViewModel.userLogin.observe(this){
             if(it != null){
                 RunTimeValue.logInResponse = it
+                it.authorisation?.token
                 preference.putAuthToken(it.authorisation?.token)
                 it.user?.name?.let { it1 -> preference.putName(it1) }
                 it.user?.mobile?.let { it1 -> preference.putMobileNumber(it1) }
@@ -98,6 +99,10 @@ class LogInActivity : AppCompatActivity() {
     private fun moveToNextMainPage() {
         startActivity(Intent(this@LogInActivity, MainActivity::class.java))
         finish()
+    }
+
+    override fun onBackPressed() {
+        finishAffinity()
     }
 
 }
