@@ -32,4 +32,5 @@
     <string name="menu_description">Describe</string>
     <string name="this_field_is_required">This field is required</string>
     <string name="notice">Notifications</string>
+    <string name="noticeDetails">Notification Details</string>
 </resources>

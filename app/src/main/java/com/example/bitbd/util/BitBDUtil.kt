@@ -8,6 +8,7 @@ import android.os.Build
 import android.widget.Toast
 import com.example.bitbd.animation.LoadingProgress
 import java.util.*
+
 @Suppress("DEPRECATION")
 object BitBDUtil {
 

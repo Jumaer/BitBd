@@ -66,8 +66,7 @@ interface ApiInterface {
     ): Response<NotificationsBaseResponse>
 
 
-    @GET("api/v1/notification/{id}/details")
-    suspend fun getSingleNotification(@Path("id") id : Int):Response<NotificationResponse>
+
 
 
 }

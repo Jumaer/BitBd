@@ -31,6 +31,10 @@ const val CACHE_CONTROL = "Cache-Control"
 const val MOBILE_NUMBER = "mobile-number"
 const val NAME = "name"
 
+const val MESSAGE = "message"
+const val TIME_CREATED = "created-time"
+const val TIME_UPDATED = "updated-time"
+
 
 
 

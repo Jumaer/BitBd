@@ -51,34 +51,4 @@ class NotificationViewModel : ViewModel() {
 
     }
 
-
-    private val _userNotificationWithId = MutableLiveData<NotificationResponse>()
-    val userNotificationWithId: LiveData<NotificationResponse>
-        get() = _userNotificationWithId
-
-    fun getSingleNotification(context: Context, id: Int) {
-        _progress.value = true
-        viewModelScope.launch {
-            val response = try {
-                withContext(Dispatchers.IO) {
-                    networkCall(context)?.getSingleNotification(id)
-                }
-
-            } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to log in", context)
-                return@launch
-            }
-
-            if (response?.isSuccessful == true && response.body() != null) {
-                _userNotificationWithId.value = response.body()
-                _progress.value = false
-            } else {
-                _progress.value = false
-                if (response?.code() != null) {
-                    Log.d("doneValue :: ", response.message())
-                }
-            }
-        }
-
-    }
 }
