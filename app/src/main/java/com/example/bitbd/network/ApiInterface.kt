@@ -91,4 +91,21 @@ interface ApiInterface {
         @Path("slug") slug: String,
     ):Response<BaseProfileUpdate>
 
+
+
+
+
+    @Multipart
+    @POST("api/v1/deposit/store")
+    suspend fun submitDepositWithImage(
+        @Part("account") account: RequestBody,
+        @Part("method_id") method_id: RequestBody,
+        @Part("trx_id") trx_id: RequestBody,
+        @Part("amount") amount: RequestBody,
+        @Part  part : MultipartBody.Part
+    ):Response<JsonObject>
+
+
+
+
 }

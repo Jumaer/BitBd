@@ -33,6 +33,8 @@ const val TIME_CREATED = "created-time"
 const val TIME_UPDATED = "updated-time"
 const val SLUG = "slug"
 const val DEPOSIT = "Deposit-item"
+const val MIN_DEPOSIT = "Deposit-minimum"
+const val RATE_DEPOSIT = "Deposit-rate"
 
 
 

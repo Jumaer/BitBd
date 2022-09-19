@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.constant.DEPOSIT
 import com.example.bitbd.databinding.FragmentDepositUpdateBinding
+import com.example.bitbd.sharedPref.BitBDPreferences
 import com.example.bitbd.ui.activity.submit.SubmitDepositActivity
 import com.example.bitbd.ui.fragment.deposit.adapter.PaymentItemsAdapter
 import com.example.bitbd.ui.fragment.deposit.model.PaymentMethod
@@ -37,7 +38,7 @@ class DepositUpdateFragment : Fragment() {
         // Inflate the layout for this fragment
         val slideshowViewModel =
             ViewModelProvider(this)[DepositViewModel::class.java]
-
+        preference = BitBDPreferences(requireContext())
         _binding = FragmentDepositUpdateBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -60,6 +61,7 @@ class DepositUpdateFragment : Fragment() {
         binding.gridPayamentRecycle.adapter?.notifyDataSetChanged()
 
     }
+    private lateinit var preference: BitBDPreferences
 
     @SuppressLint("NotifyDataSetChanged")
     private fun getExpectedData(viewModel: DepositViewModel) {
@@ -77,7 +79,8 @@ class DepositUpdateFragment : Fragment() {
             if (it != null) {
                 RunTimeValue.getBaseResponsePayment = it
                 val dataList = it.data?.methods ?: return@observe
-
+                preference.putMinDeposit(it.data?.minDeposit.toString())
+                preference.putRateOfDeposit(it.data?.depositRate.toString())
                 itemList.clear()
                 for (value in dataList) {
                     itemList.add(value)
@@ -95,7 +98,7 @@ class DepositUpdateFragment : Fragment() {
     private fun onAdapterItemClick(position: Int) {
            val intent  = Intent(requireContext(),SubmitDepositActivity::class.java)
            intent.putExtra(DEPOSIT, itemList[position]);
-           startActivity(Intent(requireContext(),SubmitDepositActivity::class.java))
+           startActivity(intent)
     }
 
    }

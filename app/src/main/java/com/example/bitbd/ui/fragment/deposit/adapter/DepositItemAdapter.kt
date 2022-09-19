@@ -77,17 +77,15 @@ class DepositItemAdapter (
                 binding.TrxAccNumber.text = this.vtrxAccount
                 binding.Status.text = this.status
                 if(this.status == "Pending"){
-                    binding.Status.setBackgroundColor(ContextCompat.getColor(context, R.color.pending))
+                    binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_pending)
                    //     binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
-                    binding.ActionPerform.setBackgroundColor(ContextCompat.getColor(context,
-                        R.color.deleteEnable
-                    ))
+                    binding.ActionPerform.background = ContextCompat.getDrawable(context, R.drawable.item_shape_delete)
                 }
                 else if(this.status == "Approved"){
-                    binding.Status.setBackgroundColor(ContextCompat.getColor(context, R.color.approved))
-                    binding.ActionPerform.setBackgroundColor(ContextCompat.getColor(context,
-                        R.color.deleteDisable
-                    ))
+                    binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_approved)
+                    binding.ActionPerform.background = ContextCompat.getDrawable(context,
+                        R.drawable.item_shape_not_delete
+                    )
                 }
 
             }

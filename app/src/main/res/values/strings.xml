@@ -59,4 +59,5 @@
     <string name="enterArxAmount">Enter Trx Amount</string>
     <string name="submit">Submit</string>
     <string name="depositDetails">Add New Deposit</string>
+    <string name="trxScreenSt">Trx Screenshot Image</string>
 </resources>

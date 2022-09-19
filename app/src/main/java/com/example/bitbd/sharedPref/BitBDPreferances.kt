@@ -109,7 +109,20 @@ class BitBDPreferences(context: Context) {
         return preferences.getString(USERNAME, "")
     }
 
-
+    fun putMinDeposit(minValue : String){
+        editor.putString(MIN_DEPOSIT, minValue)
+        editor.apply()
+    }
+    fun putRateOfDeposit(rateValue : String){
+        editor.putString(RATE_DEPOSIT, rateValue)
+        editor.apply()
+    }
+    fun getRateOfDeposit() : String? {
+        return preferences.getString(RATE_DEPOSIT, "")
+    }
+    fun getMinDeposit() : String? {
+        return preferences.getString(MIN_DEPOSIT, "")
+    }
 
     fun putSlug(slug : String){
         editor.putString(SLUG, slug)

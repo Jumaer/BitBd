@@ -13,6 +13,6 @@ data class PaymentInfo(
     var depositRate: String?,
 
     @SerializedName("min_deposit")
-    var minDeposit: String? = null
+    var minDeposit: String?
 ) : Parcelable
 

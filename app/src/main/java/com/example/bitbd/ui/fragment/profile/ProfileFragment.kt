@@ -117,19 +117,22 @@ class ProfileFragment : Fragment() {
         if (name == "") {
             binding.nameLayout.error = getString(R.string.this_field_is_required)
         }
-        binding.nameLayout.error = null
+        else binding.nameLayout.error = null
 
         if (phone == "") {
             binding.phoneLayout.error = getString(R.string.this_field_is_required)
         }
-        binding.phoneLayout.error = null
+        else binding.phoneLayout.error = null
 
         if (password != passwordConf) {
             binding.passwordLayout.error = getString(R.string.password_match)
             binding.retypePasswordLayout.error = getString(R.string.password_match)
         }
-        binding.passwordLayout.error = null
-        binding.retypePasswordLayout.error = null
+        else{
+            binding.passwordLayout.error = null
+            binding.retypePasswordLayout.error = null
+        }
+
 
 
         if (name == "" || phone == "" || password != passwordConf) {
