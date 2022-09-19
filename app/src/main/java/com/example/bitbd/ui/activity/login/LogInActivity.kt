@@ -41,7 +41,6 @@ class LogInActivity : AppCompatActivity() {
     }
 
     private fun logInSubmit() {
-
         try {
             val imm: InputMethodManager =
                 getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -88,8 +87,14 @@ class LogInActivity : AppCompatActivity() {
                 RunTimeValue.logInResponse = it
                 it.authorisation?.token
                 preference.putAuthToken(it.authorisation?.token)
-                it.user?.name?.let { it1 -> preference.putName(it1) }
-                it.user?.mobile?.let { it1 -> preference.putMobileNumber(it1) }
+                it.user?.name?.let { it1 -> preference.putName(it1.toString()) }
+                it.user?.mobile?.let { it1 -> preference.putMobileNumber(it1.toString()) }
+                it.user?.email?.let { it1 -> preference.putEmail(it1.toString()) }
+                it.user?.image?.let { it1 -> preference.putImageUrl(it1.toString()) }
+                it.user?.affiliateStatus?.let { it1 -> preference.putAffiliate(it1.toInt()) }
+                it.user?.affiliateCode?.let { it1 -> preference.putAffiliateCode(it1.toString()) }
+                it.user?.username?.let { it1 -> preference.putUserName(it1.toString()) }
+                it.user?.slug?.let { it1 -> preference.putSlug(it1.toString()) }
                 loading?.dismiss()
                 moveToNextMainPage()
             }

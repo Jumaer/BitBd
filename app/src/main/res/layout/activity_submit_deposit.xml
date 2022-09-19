@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.activity.submit.SubmitDepositActivity">
+
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:background="#F6F5F6"
+            >
+
+            <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/transAccNumber"
+                android:textColor="@color/black"
+                android:id="@+id/headingText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameLayout"
+                android:layout_marginTop="8dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/enterTransAccNumber"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headingText1"
+                app:layout_constraintVertical_chainStyle="packed">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/trxIdNumber"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"
+                android:id="@+id/headingText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameLayout" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/userNameLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/enterTrxIdNumber"
+                app:errorEnabled="true"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headingText2"
+                app:layout_constraintVertical_chainStyle="packed">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/trxAmount"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"
+                android:id="@+id/headingText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userNameLayout" />
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/enterArxAmount"
+                android:layout_marginTop="8dp"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headingText3"
+                app:layout_constraintVertical_chainStyle="packed">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:maxLength="11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/coin"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"
+                android:id="@+id/headingText4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phoneLayout" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/coin"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/headingText4"
+                app:layout_constraintVertical_chainStyle="packed">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/imageContainerCard"
+                android:elevation="2dp"
+                app:cardCornerRadius="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="184dp"
+                app:layout_constraintTop_toBottomOf="@+id/emailLayout"
+                tools:layout_editor_absoluteX="24dp">
+
+                <ImageView
+                    android:alpha=".7"
+                    android:id="@+id/uploadImage"
+                    android:background="@drawable/ic_round_shape"
+                    android:src="@drawable/ic_baseline_add_a_photo_24"
+                    android:layout_width="wrap_content"
+                    android:padding="8dp"
+                    android:layout_height="wrap_content"
+                    />
+
+                <ImageView
+                    android:id="@+id/trxImage"
+                    android:background="@drawable/payment_shape"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/signUpButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/submit"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageContainerCard" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

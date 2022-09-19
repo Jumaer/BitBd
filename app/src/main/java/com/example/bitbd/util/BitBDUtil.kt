@@ -1,13 +1,30 @@
 package com.example.bitbd.util
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.text.Editable
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
+import com.airbnb.lottie.LottieAnimationView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
+import com.example.bitbd.ui.fragment.deposit.model.DepositDataResponse
+import com.example.bitbd.ui.fragment.profile.ProfileFragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.imageview.ShapeableImageView
 import java.util.*
+import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
 object BitBDUtil {
@@ -66,6 +83,95 @@ object BitBDUtil {
         return loadingProgress as LoadingProgress
     }
 
+
+    fun editable (value : String): Editable? {
+      return  Editable.Factory.getInstance().newEditable(value)
+    }
+
+    fun loadImage(profileImageView: ShapeableImageView, profileImageLoader: LottieAnimationView, urlProfileImage: String, context: Context) {
+
+        Glide.with(context)
+            .load(urlProfileImage)
+            .placeholder(R.drawable.ic_baseline_account_box_24)
+            .error(R.drawable.ic_baseline_account_box_24).listener(object :
+                RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    profileImageLoader.visibility = View.GONE
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    profileImageLoader.visibility = View.GONE
+                    return false
+                }
+
+            })
+            .into(profileImageView)
+    }
+
+
+    @SuppressLint("QueryPermissionsNeeded", "UnsupportedChromeOsCameraSystemFeature")
+    fun openDialogToGetImage(customDialog: BottomSheetDialog, cameraFolder : ClickUploadPicture) {
+        customDialog.setContentView(R.layout.dialog_take_photo)
+        val cameraBtn: LinearLayout? = customDialog.findViewById(R.id.camera)
+        val folderBtn: LinearLayout? = customDialog.findViewById(R.id.folder)
+        cameraBtn?.setOnClickListener {
+           cameraFolder.cameraClick()
+        }
+        folderBtn?.setOnClickListener {
+           cameraFolder.chooseFolderPicture()
+        }
+        customDialog.show()
+    }
+
+
+    interface ClickUploadPicture{
+        fun cameraClick()
+        fun chooseFolderPicture()
+    }
+
+
+    private suspend fun checkIsValueInList(value : String , list : List<String>) : List<Boolean>{
+        val listOfResult : MutableList<Boolean> = ArrayList()
+        for (searchValue in list){
+           if(value in searchValue) {
+              listOfResult.add(true)
+           }
+           else{
+               listOfResult.add(false)
+          }
+        }
+        return listOfResult
+    }
+
+    suspend fun getResultListFromAllTypeLists(value : String,
+                                      lists : List<List<String>> ,
+                                      searchList : List<DepositDataResponse>) : MutableList<DepositDataResponse> {
+        var listOfResult : MutableList<DepositDataResponse> = ArrayList()
+
+        for (passList in lists ){
+          val listOfResultBoolean = checkIsValueInList(value,passList)
+            for (i in listOfResultBoolean.indices) {
+                if(listOfResultBoolean[i]){
+                    listOfResult.add(searchList[i])
+                    listOfResult = listOfResult.distinct().toMutableList()
+                }
+            }
+        }
+
+        return listOfResult
+    }
 
 
 }

@@ -65,11 +65,60 @@ class BitBDPreferences(context: Context) {
         editor.apply()
     }
 
-    fun putStringSet(prefKeyCookies: String, cookies: HashSet<String>) {
-
-
+    fun putEmail(email : String) {
+        editor.putString(EMAIL, email)
+        editor.apply()
+    }
+    fun geEmail(): String?{
+        return preferences.getString(EMAIL, "")
     }
 
+    fun putImageUrl(imageUrl : String){
+        editor.putString(IMAGE_URL, imageUrl)
+        editor.apply()
+    }
+    fun getImageUrl(): String?{
+        return preferences.getString(IMAGE_URL, "")
+    }
+
+    fun putAffiliate(affiliateStatus : Int){
+        editor.putInt(AFFILIATE_STATUS, affiliateStatus)
+        editor.apply()
+    }
+
+    fun getAffiliate() : Int{
+        return preferences.getInt(AFFILIATE_STATUS, -1)
+    }
+
+    fun putAffiliateCode(code : String){
+        editor.putString(AFFILIATE_CODE, code)
+        editor.apply()
+    }
+
+    fun getAffiliateCode() : String? {
+        return preferences.getString(AFFILIATE_CODE, "")
+    }
+
+
+    fun putUserName(username : String){
+        editor.putString(USERNAME, username)
+        editor.apply()
+    }
+
+    fun getUsername() : String? {
+        return preferences.getString(USERNAME, "")
+    }
+
+
+
+    fun putSlug(slug : String){
+        editor.putString(SLUG, slug)
+        editor.apply()
+    }
+
+    fun getUserSlug() : String? {
+        return preferences.getString(SLUG, "")
+    }
     companion object {
         private const val PREFERENCE_TITLE = "bit-bd-Preference"
     }

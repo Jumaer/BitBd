@@ -5,6 +5,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
     <application
         android:name=".constant.MyApplication"
@@ -17,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BitBd"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activity.submit.SubmitDepositActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.notification.NotificationDetailsActivity"
             android:exported="false" />

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bottom_shape"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingTop="10dp"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:textSize="16sp"
+        android:gravity="center"
+        android:src="@drawable/ic_baseline_horizontal_rule_24"
+        android:id="@+id/header"
+        android:scaleType="centerCrop"
+        android:paddingLeft="140dp"
+        android:paddingRight="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        />
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <LinearLayout
+            android:padding="8dp"
+            android:id="@+id/camera"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:src="@drawable/ic_baseline_camera_click"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+            <TextView
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/takePicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:padding="8dp"
+            android:id="@+id/folder"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/camera">
+
+            <ImageView
+                android:src="@drawable/ic_baseline_folder_24"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+            <TextView
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/selectFromFolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</LinearLayout>

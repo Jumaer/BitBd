@@ -30,6 +30,12 @@
             android:id="@+id/nav_transaction"
             android:icon="@drawable/ic_menu_transaction"
             android:title="@string/menu_transaction" />
+
+        <item
+            app:iconTint="@color/teal_200"
+            android:id="@+id/nav_affiliate"
+            android:icon="@drawable/ic_menu_affiliate"
+            android:title="@string/menu_affiliate" />
         <item
             android:onClick="logOutFromApplication"
             app:iconTint="@color/teal_200"

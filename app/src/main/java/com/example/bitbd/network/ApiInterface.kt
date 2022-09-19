@@ -7,7 +7,9 @@ import com.example.bitbd.ui.activity.notification.model.NotificationsBaseRespons
 import com.example.bitbd.ui.fragment.deposit.model.BaseDepositResponse
 import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
 import com.example.bitbd.ui.fragment.deposit.model.GetPaymentBaseResponse
+import com.example.bitbd.ui.fragment.profile.model.BaseProfileUpdate
 import com.example.bitbd.ui.fragment.transaction.model.BaseTransactionResponse
+import com.google.gson.JsonObject
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -66,7 +68,27 @@ interface ApiInterface {
     ): Response<NotificationsBaseResponse>
 
 
+    @Multipart
+    @POST("api/v1/profile-update/{slug}")
+    suspend fun updateProfile(
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("phone") phone: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("password_conformation") passwordConform: RequestBody,
+        @Path("slug") slug: String,
+        @Part  part : MultipartBody.Part
+    ):Response<BaseProfileUpdate>
 
-
+    @FormUrlEncoded
+    @POST("api/v1/profile-update/{slug}")
+    suspend fun updateProfile(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("phone") phone: String,
+        @Field("password") password: String,
+        @Field("password_conformation")  passwordConform: String,
+        @Path("slug") slug: String,
+    ):Response<BaseProfileUpdate>
 
 }

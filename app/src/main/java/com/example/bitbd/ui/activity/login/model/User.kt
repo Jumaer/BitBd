@@ -27,6 +27,7 @@ data class User(
 
     @SerializedName("email_verified_at")
     var emailVerifiedAt: String? ,
+
     @SerializedName("image")
     var image: String? ,
 

@@ -1,7 +1,10 @@
 package com.example.bitbd.ui.fragment.deposit.model
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class PaymentInfo(
     @SerializedName("methods")
     var methods: List<PaymentMethod>?,
@@ -11,5 +14,5 @@ data class PaymentInfo(
 
     @SerializedName("min_deposit")
     var minDeposit: String? = null
-)
+) : Parcelable
 

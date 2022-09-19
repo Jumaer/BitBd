@@ -52,7 +52,6 @@ class DepositViewModel : ViewModel() {
 
             if (response?.isSuccessful == true && response.body() != null) {
                 _deposit.value = response.body()
-                _progress.value = false
             } else {
                 _progress.value = false
                 if (response?.code() != null) {
@@ -83,7 +82,7 @@ class DepositViewModel : ViewModel() {
 
             if (response?.isSuccessful == true && response.body() != null) {
                 _payment.value = response.body()
-                _progress.value = false
+
             } else {
                 _progress.value = false
                 if (response?.code() != null) {

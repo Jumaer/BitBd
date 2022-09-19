@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
         android:background="@color/teal_200"
-        android:gravity="bottom"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
@@ -21,27 +21,50 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:contentDescription="@string/nav_header_desc"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_baseline_account_box_24" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/nav_header_vertical_spacing"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/profile_display_image_height"
+                android:layout_height="@dimen/profile_display_image_height"
+                android:alpha=".7"
+                android:background="@color/teal_200"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:srcCompat="@drawable/ic_baseline_account_box_24" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="@dimen/profile_display_image_height"
+                android:layout_height="@dimen/profile_display_image_height"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/anim_loader" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="@string/nav_header_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
             android:id="@+id/mobileOrEmail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nav_header_subtitle" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
     </LinearLayout>
 
 
