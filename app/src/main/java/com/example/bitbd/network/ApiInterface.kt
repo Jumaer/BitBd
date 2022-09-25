@@ -7,8 +7,11 @@ import com.example.bitbd.ui.activity.notification.model.NotificationsBaseRespons
 import com.example.bitbd.ui.fragment.deposit.model.BaseDepositResponse
 import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
 import com.example.bitbd.ui.fragment.deposit.model.GetPaymentBaseResponse
+import com.example.bitbd.ui.fragment.home.model.ResponseDashboard
 import com.example.bitbd.ui.fragment.profile.model.BaseProfileUpdate
 import com.example.bitbd.ui.fragment.transaction.model.BaseTransactionResponse
+import com.example.bitbd.ui.fragment.withdraw_money.model.ResponseAccountInfo
+import com.example.bitbd.ui.fragment.withdraw_money.model.ResponseWithdraw
 import com.google.gson.JsonObject
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -37,7 +40,9 @@ interface ApiInterface {
     suspend fun deposit(
     ): Response<BaseDepositResponse>
 
-
+    @GET("api/v1/dashboard")
+    suspend fun dashBoard(
+    ): Response<ResponseDashboard>
 
     @GET("api/v1/get-payment-info")
     suspend fun getPaymentInfo(
@@ -103,7 +108,21 @@ interface ApiInterface {
         @Part("trx_id") trx_id: RequestBody,
         @Part("amount") amount: RequestBody,
         @Part  part : MultipartBody.Part
-    ):Response<JsonObject>
+    ):Response<DepositSubmit>
+
+
+    @POST("api/v1/deposit/{id}/destroy")
+    suspend fun deleteDeposit(@Path("id") id: String):Response<JsonObject>
+
+
+    @GET("api/v1/withdraw")
+    suspend fun getWithdraw(
+    ): Response<ResponseWithdraw>
+
+
+    @GET("api/v1/get-account-info")
+    suspend fun getWithdrawAccountInfo(
+    ): Response<ResponseAccountInfo>
 
 
 

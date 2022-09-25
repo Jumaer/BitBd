@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bitbd.constant.networkCall
+import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
 import com.example.bitbd.util.BitBDUtil
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +24,8 @@ class SubmitDepositViewModel : ViewModel() {
         get() = _progress
 
 
-    private val _deposit = MutableLiveData<JsonObject>()
-    val deposit: LiveData<JsonObject>
+    private val _deposit = MutableLiveData<DepositSubmit>()
+    val deposit: LiveData<DepositSubmit>
         get() = _deposit
 
 

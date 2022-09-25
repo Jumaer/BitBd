@@ -19,6 +19,7 @@ import com.example.bitbd.constant.MESSAGE
 import com.example.bitbd.constant.TIME_CREATED
 import com.example.bitbd.constant.TIME_UPDATED
 import com.example.bitbd.databinding.FragmentDepositBinding
+import com.example.bitbd.sharedPref.BitBDPreferences
 import com.example.bitbd.ui.activity.notification.NotificationDetailsActivity
 import com.example.bitbd.ui.activity.notification.adapter.NotificationAdapter
 import com.example.bitbd.ui.activity.notification.model.NotificationResponse
@@ -26,6 +27,7 @@ import com.example.bitbd.ui.fragment.deposit.adapter.DepositItemAdapter
 import com.example.bitbd.ui.fragment.deposit.model.DepositDataResponse
 import com.example.bitbd.util.BitBDUtil
 import kotlinx.coroutines.launch
+import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -36,10 +38,12 @@ class DepositFragment : Fragment() {
 
     private var _binding: FragmentDepositBinding? = null
     var depositItemListFromServer: MutableList<DepositDataResponse> = ArrayList()
-
+    var slideshowViewModel : DepositViewModel? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    var preferences : BitBDPreferences? = null
 
     @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -48,15 +52,14 @@ class DepositFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val slideshowViewModel =
-            ViewModelProvider(this)[DepositViewModel::class.java]
+         slideshowViewModel = ViewModelProvider(this)[DepositViewModel::class.java]
+         _binding = FragmentDepositBinding.inflate(inflater, container, false)
+         val root: View = binding.root
 
-        _binding = FragmentDepositBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-
+         preferences = BitBDPreferences(requireContext())
         createDisplayAdapterForDeposits()
-        getExpectedData(slideshowViewModel)
+        getExpectedData(slideshowViewModel!!)
+
 
 
         binding.appCompatEditText.doAfterTextChanged {
@@ -145,12 +148,12 @@ class DepositFragment : Fragment() {
         for (depositItem in depositItemList) {
             dateList.add(
                 ZonedDateTime.parse(depositItem.createdAt)
-                    .format(
+                     .withZoneSameInstant(ZoneId.systemDefault())
+                     .format(
                         DateTimeFormatter.ofPattern(
-                            "dd MMMM yyyy",
-                            Locale.ENGLISH
+                            "dd MMMM yyyy"
                         )
-                    )
+                      )
             )
             depositItem.trxName?.let { accNameList.add(it) }
             depositItem.trxId?.let { trxIdList.add(it) }
@@ -186,7 +189,10 @@ class DepositFragment : Fragment() {
 
 
     private fun onAdapterItemClick(position: Int) {
-
+            lifecycleScope.launch{
+                slideshowViewModel?.deleteDeposit(requireContext(),
+                    depositItemListFromServer[position].id.toString())
+            }
     }
 
 
@@ -205,4 +211,16 @@ class DepositFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        if( preferences?.getAnyChange() == true){
+            preferences?.setAnyChange(false)
+            lifecycleScope.launch {
+                slideshowViewModel?.deposit(requireContext())
+            }
+        }
+    }
+
 }

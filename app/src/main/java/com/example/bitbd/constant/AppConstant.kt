@@ -32,9 +32,11 @@ const val MESSAGE = "message"
 const val TIME_CREATED = "created-time"
 const val TIME_UPDATED = "updated-time"
 const val SLUG = "slug"
+const val BALANCE = "slug"
 const val DEPOSIT = "Deposit-item"
 const val MIN_DEPOSIT = "Deposit-minimum"
 const val RATE_DEPOSIT = "Deposit-rate"
+const val IS_LIST_UPDATED = "updated-deposit"
 
 
 

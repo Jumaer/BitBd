@@ -60,4 +60,10 @@
     <string name="submit">Submit</string>
     <string name="depositDetails">Add New Deposit</string>
     <string name="trxScreenSt">Trx Screenshot Image</string>
+    <string name="transAccType">Type </string>
+    <string name="selectType">Select Type</string>
+    <string name="transAcc">Account</string>
+    <string name="selectAccount">Select Account</string>
+    <string name="balanceHint">"Your available balance is : "</string>
+    <string name="withdrawHint">Withdraw Allow Dates :</string>
 </resources>

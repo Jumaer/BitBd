@@ -75,8 +75,10 @@ class SubmitDepositActivity : AppCompatActivity() {
 
         viewModel.deposit.observe(this){
             if(it != null){
-                BitBDUtil.showMessage(it.get("message").toString(),this@SubmitDepositActivity)
+                it.message?.let { it1 -> BitBDUtil.showMessage(it1,this@SubmitDepositActivity) }
                 loading?.dismiss()
+                preference.setAnyChange(true)
+                onBackPressed()
             }
         }
 

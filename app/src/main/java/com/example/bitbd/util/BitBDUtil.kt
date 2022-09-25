@@ -21,6 +21,7 @@ import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.ui.fragment.deposit.model.DepositDataResponse
 import com.example.bitbd.ui.fragment.profile.ProfileFragment
+import com.example.bitbd.ui.fragment.withdraw_money.model.BaseResponseWithdraw
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.imageview.ShapeableImageView
 import java.util.*
@@ -162,6 +163,25 @@ object BitBDUtil {
 
         for (passList in lists ){
           val listOfResultBoolean = checkIsValueInList(value,passList)
+            for (i in listOfResultBoolean.indices) {
+                if(listOfResultBoolean[i]){
+                    listOfResult.add(searchList[i])
+                    listOfResult = listOfResult.distinct().toMutableList()
+                }
+            }
+        }
+
+        return listOfResult
+    }
+
+
+    suspend fun getResultListFromAllTypeWithdrawLists(value : String,
+                                              lists : List<List<String>> ,
+                                              searchList : List<BaseResponseWithdraw>) : MutableList<BaseResponseWithdraw> {
+        var listOfResult : MutableList<BaseResponseWithdraw> = ArrayList()
+
+        for (passList in lists ){
+            val listOfResultBoolean = checkIsValueInList(value,passList)
             for (i in listOfResultBoolean.indices) {
                 if(listOfResultBoolean[i]){
                     listOfResult.add(searchList[i])

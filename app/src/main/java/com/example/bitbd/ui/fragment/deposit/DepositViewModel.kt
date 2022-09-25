@@ -11,7 +11,9 @@ import com.example.bitbd.ui.fragment.deposit.model.BaseDepositResponse
 import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
 import com.example.bitbd.ui.fragment.deposit.model.GetPaymentBaseResponse
 import com.example.bitbd.util.BitBDUtil
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
@@ -93,41 +95,40 @@ class DepositViewModel : ViewModel() {
         }
     }
 
-    private val _depositSubmit = MutableLiveData<DepositSubmit>()
-    val depositSubmit: LiveData<DepositSubmit>
-        get() = _depositSubmit
 
-    suspend fun depositSubmit(
-        context: Context,
-        account: RequestBody,
-        method_id: RequestBody,
-        trx_id: RequestBody,
-        amount: RequestBody,
-        part: MultipartBody.Part
-    ) {
+
+    private val _depositDelete = MutableLiveData<JsonObject>()
+    val depositDelete: LiveData<JsonObject>
+        get() = _depositDelete
+
+    suspend fun deleteDeposit(context: Context, id : String){
         _progress.value = true
         viewModelScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    networkCall(context)?.depositDataStore(account, method_id, trx_id, amount, part)
+                    networkCall(context)?.deleteDeposit(id)
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to show anything", context)
+                BitBDUtil.showMessage("Unable to delete anything", context)
                 _progress.value = false
                 return@launch
             }
 
             if (response?.isSuccessful == true && response.body() != null) {
-                _depositSubmit.value = response.body()
-                _progress.value = false
+                _depositDelete.value = response.body()
+                 BitBDUtil.showMessage("Refreshing list", context)
+                 deposit(context)
             } else {
                 _progress.value = false
                 if (response?.code() != null) {
                     Log.d("doneValue :: ", response.message())
                 }
-
+                deposit(context)
             }
         }
     }
+
+
+
 }

@@ -129,8 +129,24 @@ class BitBDPreferences(context: Context) {
         editor.apply()
     }
 
+    fun setAnyChange(isChange : Boolean){
+        editor.putBoolean(IS_LIST_UPDATED, isChange)
+        editor.apply()
+    }
+
+    fun getAnyChange(): Boolean {
+        return preferences.getBoolean(IS_LIST_UPDATED, false)
+    }
     fun getUserSlug() : String? {
         return preferences.getString(SLUG, "")
+    }
+
+    fun getAvailableBalance() : String? {
+        return preferences.getString(BALANCE, "")
+    }
+    fun putAvailableBalance(balance : String){
+        editor.putString(BALANCE, balance)
+        editor.apply()
     }
     companion object {
         private const val PREFERENCE_TITLE = "bit-bd-Preference"

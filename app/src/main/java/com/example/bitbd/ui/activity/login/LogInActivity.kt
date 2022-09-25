@@ -95,6 +95,7 @@ class LogInActivity : AppCompatActivity() {
                 it.user?.affiliateCode?.let { it1 -> preference.putAffiliateCode(it1.toString()) }
                 it.user?.username?.let { it1 -> preference.putUserName(it1.toString()) }
                 it.user?.slug?.let { it1 -> preference.putSlug(it1.toString()) }
+                it.user?.balance?.let { it1-> preference.putAvailableBalance(it1.toString()) }
                 loading?.dismiss()
                 moveToNextMainPage()
             }

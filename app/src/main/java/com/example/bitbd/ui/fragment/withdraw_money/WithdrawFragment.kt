@@ -1,5 +1,6 @@
 package com.example.bitbd.ui.fragment.withdraw_money
 
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.example.bitbd.databinding.FragmentDepositsContainerBinding
 import com.example.bitbd.databinding.FragmentWithdrawBinding
+import com.example.bitbd.ui.fragment.deposit.adapter.DepositPagerAdapter
+import com.example.bitbd.ui.fragment.withdraw_money.adapter.WithdrawPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,21 +25,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class WithdrawFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
     private var _binding: FragmentWithdrawBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +44,16 @@ class WithdrawFragment : Fragment() {
         _binding = FragmentWithdrawBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textWithdraw
-        withdrawViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
+
+        binding.viewPager.adapter = WithdrawPagerAdapter(requireActivity())
+        TabLayoutMediator(binding.tabLayout,binding.viewPager){tab, index ->
+            tab.text= when(index){
+                0-> "View All"
+                1-> "Add New"
+                else -> {throw Resources.NotFoundException("Position not found")}
+            }
+        }.attach()
         return root
     }
 

@@ -12,6 +12,7 @@ import com.example.bitbd.R
 import com.example.bitbd.databinding.LayoutDipositItemListBinding
 import com.example.bitbd.ui.fragment.deposit.model.DepositDataResponse
 import com.example.bitbd.util.BitBDUtil
+import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -63,10 +64,10 @@ class DepositItemAdapter (
                binding.Action.visibility = View.GONE
                binding.ActionPerform.visibility = View.VISIBLE
                binding.Date.text = ZonedDateTime.parse(this.createdAt)
+                   .withZoneSameInstant(ZoneId.of("Asia/Dhaka"))
                    .format(
                        DateTimeFormatter.ofPattern(
-                           "dd MMMM yyyy",
-                           Locale.ENGLISH
+                           "dd MMMM yyyy"
                        )
                    )
 
@@ -87,7 +88,7 @@ class DepositItemAdapter (
                         R.drawable.item_shape_not_delete
                     )
                 }
-
+               // binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
             }
         }
     }
