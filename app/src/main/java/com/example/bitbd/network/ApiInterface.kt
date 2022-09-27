@@ -127,4 +127,17 @@ interface ApiInterface {
 
 
 
+    @FormUrlEncoded
+    @POST("api/v1/withdraw/store")
+    suspend fun submitForWithdraw(
+        @Field("account") account: String,
+        @Field("amount") amount: String,
+        @Field("type") type: String
+    ):Response<JsonObject>
+
+
+    @GET("api/v1/withdraw/{id}/destroy")
+    suspend fun deleteItemWithdraw(@Path("id") id: String):Response<JsonObject>
+
+
 }

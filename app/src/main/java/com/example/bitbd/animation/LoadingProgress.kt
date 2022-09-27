@@ -4,11 +4,9 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.Window
-import androidx.core.content.ContextCompat
 import com.example.bitbd.R
 import com.example.bitbd.databinding.CustomDialogLoadingBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
-
 
 
 class  LoadingProgress(context: Context) : Dialog(context) {
@@ -22,10 +20,12 @@ class  LoadingProgress(context: Context) : Dialog(context) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         binding = CustomDialogLoadingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         if(BitBDPreferences(context).getAuthToken().isNullOrEmpty()){
-            binding.animationView.setAnimation(R.raw.anim_loader)
+            binding.animationView.setAnimation(R.raw.login_load)
         }
-        else binding.animationView.setAnimation(R.raw.others_load)
+        else binding.animationView.setAnimation(R.raw.all_loader)
 
     }
 }

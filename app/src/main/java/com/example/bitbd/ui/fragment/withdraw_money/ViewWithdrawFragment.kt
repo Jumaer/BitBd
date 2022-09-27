@@ -101,7 +101,10 @@ class ViewWithdrawFragment : Fragment() {
     }
 
     private fun onAdapterItemClick(position: Int) {
-
+           val withdrawItem = withdrawItemListFromServer[position]
+           lifecycleScope.launch{
+               slideshowViewModel?.withdrawItemDelete(requireContext(), withdrawItem.id.toString())
+           }
 
     }
 
@@ -133,6 +136,15 @@ class ViewWithdrawFragment : Fragment() {
                 withdrawItemList.addAll(withdrawItemListFromServer)
                 adapter.notifyDataSetChanged()
                 createExpectedSearchList(withdrawItemList, loading)
+            }
+        }
+
+
+        viewModel.deleteWithdraw.observe(viewLifecycleOwner){
+            if(it != null){
+                lifecycleScope.launch {
+                    viewModel.withdraw(requireContext())
+                }
             }
         }
 
@@ -184,6 +196,18 @@ class ViewWithdrawFragment : Fragment() {
         amountList.clear()
         statusList.clear()
         searchListsCollection.clear()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        if( preferences?.getAnyChangeWithdraw() == true){
+            preferences?.setAnyChangeWithdraw(false)
+            lifecycleScope.launch {
+                slideshowViewModel?.withdraw(requireContext())
+            }
+        }
     }
 
 

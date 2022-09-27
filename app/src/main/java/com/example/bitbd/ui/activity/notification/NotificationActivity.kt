@@ -8,20 +8,26 @@ import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.emrekotun.toast.CpmToast.Companion.toastError
+import com.emrekotun.toast.CpmToast.Companion.toastInfo
+import com.emrekotun.toast.CpmToast.Companion.toastSuccess
+import com.emrekotun.toast.CpmToast.Companion.toastWarning
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.constant.MESSAGE
 import com.example.bitbd.constant.TIME_CREATED
 import com.example.bitbd.constant.TIME_UPDATED
 import com.example.bitbd.databinding.ActivityNotificationBinding
+import com.example.bitbd.ui.activity.BaseActivity
 import com.example.bitbd.ui.activity.notification.adapter.NotificationAdapter
 import com.example.bitbd.ui.activity.notification.model.NotificationResponse
 import com.example.bitbd.ui.activity.notification.model.NotificationsBaseResponse
 import com.example.bitbd.util.BitBDUtil
+import com.example.bitbd.util.UserToastCommunicator
 import kotlinx.coroutines.launch
 
 
-class NotificationActivity : AppCompatActivity() {
+class NotificationActivity : BaseActivity() {
     private lateinit var viewModel: NotificationViewModel
     private lateinit var binding: ActivityNotificationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +37,24 @@ class NotificationActivity : AppCompatActivity() {
         title = getString(R.string.notice)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
+        BitBDUtil.displayMessageFromUi(object : UserToastCommunicator {
+            override fun displayErrorMessage(message: String) {
+                toastError(message)
+            }
 
+            override fun displayInfoMessage(message: String) {
+                toastInfo(message)
+            }
+
+            override fun displaySuccessMessage(message: String) {
+                toastSuccess(message)
+            }
+
+            override fun displayWarningMessage(message: String) {
+                toastWarning(message)
+            }
+
+        })
         viewModel = ViewModelProvider(this)[NotificationViewModel::class.java]
         getNotifications(viewModel)
         createDisplayAdapterForNotifications()

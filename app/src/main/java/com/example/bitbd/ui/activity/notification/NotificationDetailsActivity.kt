@@ -6,17 +6,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.RequiresApi
+import com.emrekotun.toast.CpmToast.Companion.toastError
+import com.emrekotun.toast.CpmToast.Companion.toastInfo
+import com.emrekotun.toast.CpmToast.Companion.toastSuccess
+import com.emrekotun.toast.CpmToast.Companion.toastWarning
 import com.example.bitbd.R
 import com.example.bitbd.constant.MESSAGE
 import com.example.bitbd.constant.TIME_CREATED
 import com.example.bitbd.constant.TIME_UPDATED
 import com.example.bitbd.databinding.ActivityNotificationBinding
 import com.example.bitbd.databinding.ActivityNotificationDetailsBinding
+import com.example.bitbd.ui.activity.BaseActivity
+import com.example.bitbd.util.BitBDUtil
+import com.example.bitbd.util.UserToastCommunicator
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class NotificationDetailsActivity : AppCompatActivity() {
+class NotificationDetailsActivity : BaseActivity() {
     private lateinit var binding: ActivityNotificationDetailsBinding
     var message = ""
     var createdTime = ""

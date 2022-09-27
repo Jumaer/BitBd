@@ -59,6 +59,8 @@ class BitBDPreferences(context: Context) {
         return preferences.getString(NAME, "")
     }
     fun logOut(){
+        editor.remove(IMAGE_URL)
+        editor.remove(SLUG)
         editor.remove(MOBILE_NUMBER)
         editor.remove(AUTH_TOKEN)
         editor.remove(NAME)
@@ -147,6 +149,17 @@ class BitBDPreferences(context: Context) {
     fun putAvailableBalance(balance : String){
         editor.putString(BALANCE, balance)
         editor.apply()
+    }
+
+
+
+    fun setAnyChangeWithdraw(isChange : Boolean){
+        editor.putBoolean(IS_LIST_UPDATED_WITHDRAW, isChange)
+        editor.apply()
+    }
+
+    fun getAnyChangeWithdraw(): Boolean {
+        return preferences.getBoolean(IS_LIST_UPDATED_WITHDRAW, false)
     }
     companion object {
         private const val PREFERENCE_TITLE = "bit-bd-Preference"

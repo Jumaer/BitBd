@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitbd.R
+import com.example.bitbd.constant.INFO
 import com.example.bitbd.databinding.LayoutDipositItemListBinding
 import com.example.bitbd.ui.fragment.deposit.model.DepositDataResponse
 import com.example.bitbd.util.BitBDUtil
@@ -34,7 +35,7 @@ class DepositItemAdapter (
 
         override fun onClick(p0: View?) {
             if(depositItemList[adapterPosition].status == "Approved"){
-                BitBDUtil.showMessage("Already Approved",context)
+                BitBDUtil.showMessage("Already Approved", INFO)
             }
             else{
                 onItemClicked(adapterPosition)

@@ -45,9 +45,10 @@
         <entry key="app/src/main/res/layout/fragment_withdraw.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/layout_dash_board_ite.xml" value="0.19427083333333334" />
         <entry key="app/src/main/res/layout/layout_deposit_submit_view.xml" value="0.35520833333333335" />
-        <entry key="app/src/main/res/layout/layout_diposit_item_list.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/layout_diposit_item_list.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_notifications_item.xml" value="0.33958333333333335" />
         <entry key="app/src/main/res/layout/layout_payment_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/layout_transaction_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_withdraw_item_list.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.340625" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.340625" />

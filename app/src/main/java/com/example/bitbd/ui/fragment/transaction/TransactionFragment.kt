@@ -1,45 +1,42 @@
 package com.example.bitbd.ui.fragment.transaction
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bitbd.animation.LoadingProgress
+import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.databinding.FragmentTransactionBinding
+import com.example.bitbd.ui.fragment.deposit.adapter.DepositItemAdapter
+import com.example.bitbd.ui.fragment.deposit.model.DepositDataResponse
+import com.example.bitbd.ui.fragment.transaction.adapter.TransactionItemAdapter
+import com.example.bitbd.ui.fragment.transaction.model.TransactionObject
 import com.example.bitbd.util.BitBDUtil
 import kotlinx.coroutines.launch
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TransactionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TransactionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
     private var _binding: FragmentTransactionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,15 +48,41 @@ class TransactionFragment : Fragment() {
         _binding = FragmentTransactionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textTransaction
-        viewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        createDisplayAdapter()
 
         getExpectedData(viewModel)
+        binding.appCompatEditText.doAfterTextChanged {
+            val searchableText = it.toString()
+            transactionItemList.clear()
+            adapter.notifyDataSetChanged()
+            searchItem(searchableText)
+        }
         return root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun searchItem(searchableText: String) {
+        lifecycleScope.launch {
+            if (searchableText.isNotEmpty()) {
+                transactionItemList.addAll(
+                    BitBDUtil.getResultListFromAllTypeTransactionLists(
+                        searchableText,
+                        searchListsCollection,
+                        serverTransItemList
+                    )
+                )
+            } else {
+                transactionItemList.addAll(serverTransItemList)
+            }
+            adapter.notifyDataSetChanged()
+        }
+
+    }
+
+    private var serverTransItemList : MutableList<TransactionObject> = ArrayList()
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("NotifyDataSetChanged")
     private fun getExpectedData(viewModel: TransactionViewModel) {
 
         var loading : LoadingProgress? = null
@@ -75,8 +98,16 @@ class TransactionFragment : Fragment() {
 
         viewModel.baseTransaction.observe(viewLifecycleOwner){
             if(it != null){
-                BitBDUtil.showMessage(it.message.toString(), requireContext())
-                loading?.dismiss()
+                val baseResponse = it.data ?: return@observe
+                serverTransItemList.clear()
+                for(response in baseResponse){
+                    response?.let { obj -> serverTransItemList.add(obj) }
+                }
+                transactionItemList.clear()
+                transactionItemList.addAll(serverTransItemList)
+                adapter.notifyDataSetChanged()
+                createExpectedSearchList(serverTransItemList,loading)
+
             }
         }
 
@@ -85,23 +116,85 @@ class TransactionFragment : Fragment() {
         }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TransactionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TransactionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    lateinit var adapter: TransactionItemAdapter
+    private var transactionItemList: MutableList<TransactionObject> = ArrayList()
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun createDisplayAdapter() {
+        adapter = TransactionItemAdapter(transactionItemList, ::onAdapterItemClick, requireContext())
+        binding.transactionRecycle.layoutManager = LinearLayoutManager(requireContext())
+        binding.transactionRecycle.adapter = adapter
+        binding.transactionRecycle.adapter?.notifyDataSetChanged()
+    }
+
+    private fun onAdapterItemClick(position: Int) {
+
+
+    }
+
+    var dateList: MutableList<String> = ArrayList()
+    var accNameList: MutableList<String> = ArrayList()
+    var typeList: MutableList<String> = ArrayList()
+    var trxTypeList: MutableList<String> = ArrayList()
+    var trxIdList: MutableList<String> = ArrayList()
+    var amountList: MutableList<String> = ArrayList()
+    var statusList: MutableList<String> = ArrayList()
+    var trxAccountNoList: MutableList<String> = ArrayList()
+
+    var searchListsCollection: MutableList<List<String>> = ArrayList()
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createExpectedSearchList(
+        itemList: MutableList<TransactionObject>,
+        loading: LoadingProgress?
+    ) {
+        clearAllSearchList()
+        for (item in itemList) {
+            dateList.add(
+                ZonedDateTime.parse(item .createdAt)
+                    .withZoneSameInstant(ZoneId.systemDefault())
+                    .format(
+                        DateTimeFormatter.ofPattern(
+                            "dd MMMM yyyy"
+                        )
+                    )
+            )
+            item .trxName?.let { accNameList.add(it) }
+            item .trxId?.let { trxIdList.add(it) }
+            item .trxType?.let { trxTypeList.add(it) }
+            item .amount?.let { amountList.add(it.toString()) }
+            item .type?.let { typeList.add(it) }
+            item .status?.let { statusList.add(it) }
+            item .trxAccount?.let { trxAccountNoList.add(it) }
+        }
+
+        searchListsCollection.add(dateList)
+        searchListsCollection.add(accNameList)
+        searchListsCollection.add(trxIdList)
+        searchListsCollection.add(trxTypeList)
+        searchListsCollection.add(amountList)
+        searchListsCollection.add(typeList)
+        searchListsCollection.add(statusList)
+        searchListsCollection.add(trxAccountNoList)
+
+        loading?.dismiss()
+    }
+
+    private fun clearAllSearchList() {
+        dateList.clear()
+        accNameList.clear()
+        typeList.clear()
+        trxTypeList.clear()
+        trxIdList.clear()
+        amountList.clear()
+        statusList.clear()
+        trxAccountNoList.clear()
+        searchListsCollection.clear()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

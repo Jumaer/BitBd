@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:weightSum="15"
+    android:id="@+id/baseItem"
+    android:orientation="horizontal"
+    android:layout_height="64dp">
+
+
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/date"
+        android:id="@+id/Date"
+        android:layout_weight="1.8"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/type"
+        android:id="@+id/Type"
+        android:layout_weight="1.4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/accName"
+        android:id="@+id/AccountName"
+        android:layout_weight="2.2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/transAccNo"
+        android:id="@+id/TrxAccNumber"
+        android:layout_weight="2.3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/tryType"
+        android:id="@+id/TrxType"
+        android:layout_weight="1.7"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/trxId"
+        android:id="@+id/TrxID"
+        android:layout_weight="2.3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/trxAmount"
+        android:id="@+id/Amount"
+        android:layout_weight="1.7"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/status"
+        android:id="@+id/Status"
+        android:layout_weight="1.6"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+
+
+</LinearLayout>

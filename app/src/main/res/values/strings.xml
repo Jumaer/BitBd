@@ -66,4 +66,5 @@
     <string name="selectAccount">Select Account</string>
     <string name="balanceHint">"Your available balance is : "</string>
     <string name="withdrawHint">Withdraw Allow Dates :</string>
+    <string name="type">Type</string>
 </resources>

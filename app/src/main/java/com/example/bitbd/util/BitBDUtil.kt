@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.view.View
 import android.widget.LinearLayout
@@ -19,8 +21,10 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
+import com.example.bitbd.constant.*
 import com.example.bitbd.ui.fragment.deposit.model.DepositDataResponse
 import com.example.bitbd.ui.fragment.profile.ProfileFragment
+import com.example.bitbd.ui.fragment.transaction.model.TransactionObject
 import com.example.bitbd.ui.fragment.withdraw_money.model.BaseResponseWithdraw
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.imageview.ShapeableImageView
@@ -38,6 +42,7 @@ object BitBDUtil {
         context.createConfigurationContext(config)
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
+    @SuppressLint("MissingPermission")
     fun isNetworkAvailable(context: Context?): Boolean {
         if (context == null) return false
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -65,15 +70,24 @@ object BitBDUtil {
         return false
     }
 
-    private fun Context.toast(message: CharSequence) =
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-    fun showMessage( message : String , context: Context){
-        context.toast(message)
+    fun showMessage( message : String , messageType : String){
+        if(messageType == WARNING)
+        objectUserMsg?.displayWarningMessage(message)
+        if(messageType == ERROR)
+        objectUserMsg?.displayErrorMessage(message)
+        if(messageType == INFO)
+        objectUserMsg?.displayInfoMessage(message)
+        if(messageType == SUCCESS)
+        objectUserMsg?.displaySuccessMessage(message)
     }
-    fun showSessionExpireMessage( context: Context){
-        context.toast("Please log in again")
+
+    var objectUserMsg : UserToastCommunicator? = null
+
+    fun displayMessageFromUi(objectUserMsg : UserToastCommunicator){
+        this.objectUserMsg = objectUserMsg
     }
+
 
     private var loadingProgress : LoadingProgress? = null
     fun showProgress(context: Context) : LoadingProgress{
@@ -191,6 +205,26 @@ object BitBDUtil {
         }
 
         return listOfResult
+    }
+
+      suspend fun getResultListFromAllTypeTransactionLists(value : String,
+                                                 lists : List<List<String>> ,
+                                                 searchList : List<TransactionObject>): MutableList<TransactionObject> {
+
+        var listOfResult : MutableList<TransactionObject> = ArrayList()
+
+        for (passList in lists ){
+            val listOfResultBoolean = checkIsValueInList(value,passList)
+            for (i in listOfResultBoolean.indices) {
+                if(listOfResultBoolean[i]){
+                    listOfResult.add(searchList[i])
+                    listOfResult = listOfResult.distinct().toMutableList()
+                }
+            }
+        }
+
+        return listOfResult
+
     }
 
 

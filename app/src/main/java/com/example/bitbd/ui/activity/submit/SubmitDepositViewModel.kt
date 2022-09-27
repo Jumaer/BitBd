@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bitbd.constant.ERROR
 import com.example.bitbd.constant.networkCall
 import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
 import com.example.bitbd.util.BitBDUtil
@@ -46,7 +47,7 @@ class SubmitDepositViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to show anything", context)
+                BitBDUtil.showMessage("Unable to show anything", ERROR)
                 _progress.value = false
                 return@launch
             }

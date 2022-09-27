@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitbd.R
+import com.example.bitbd.constant.INFO
 import com.example.bitbd.databinding.LayoutDipositItemListBinding
 import com.example.bitbd.databinding.LayoutWithdrawItemListBinding
 import com.example.bitbd.ui.fragment.deposit.adapter.DepositItemAdapter
@@ -36,7 +37,7 @@ class WithdrawItemsAdapter (
 
         override fun onClick(p0: View?) {
             if(withdrawItemList[adapterPosition].status == "Decline"){
-                BitBDUtil.showMessage("Already Declined",context)
+                BitBDUtil.showMessage("Already Declined", INFO)
             }
             else{
                 onItemClicked(adapterPosition)

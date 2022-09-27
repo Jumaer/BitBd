@@ -19,6 +19,7 @@ import com.example.bitbd.BuildConfig
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.constant.MEDIA_TYPE
+import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.databinding.FragmentProfileBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
 import com.example.bitbd.ui.activity.main.MainActivity
@@ -87,7 +88,7 @@ class ProfileFragment : Fragment() {
                 user?.username?.let { it1 -> preference.putUserName(it1.toString()) }
                 user?.slug?.let { it1 -> preference.putSlug(it1.toString()) }
 
-                BitBDUtil.showMessage(userBase.message.toString(), requireContext())
+                BitBDUtil.showMessage(userBase.message.toString(), SUCCESS)
 
                 (activity as MainActivity?)?.getNavView()
                     ?.let { (activity as MainActivity?)?.setHeaderView(it) }

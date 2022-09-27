@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bitbd.constant.ERROR
 import com.example.bitbd.constant.networkCall
 import com.example.bitbd.ui.activity.login.model.UserLogIn
 import com.example.bitbd.ui.fragment.profile.model.BaseProfileUpdate
@@ -52,7 +53,7 @@ class ProfileViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to update info", context)
+                BitBDUtil.showMessage("Unable to update info", ERROR)
                 _progress.value = false
                 return@launch
             }
@@ -88,7 +89,7 @@ class ProfileViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to update info", context)
+                BitBDUtil.showMessage("Unable to update info", ERROR)
                 _progress.value = false
                 return@launch
             }

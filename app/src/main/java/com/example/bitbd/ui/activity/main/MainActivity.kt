@@ -21,25 +21,32 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.emrekotun.toast.CpmToast.Companion.toastError
+import com.emrekotun.toast.CpmToast.Companion.toastInfo
+import com.emrekotun.toast.CpmToast.Companion.toastSuccess
+import com.emrekotun.toast.CpmToast.Companion.toastWarning
 import com.example.bitbd.BuildConfig
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
+import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.databinding.ActivityMainBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
+import com.example.bitbd.ui.activity.BaseActivity
 import com.example.bitbd.ui.activity.login.LogInActivity
 import com.example.bitbd.ui.activity.main.mainViewModel.MainViewModel
 import com.example.bitbd.ui.activity.notification.NotificationActivity
 import com.example.bitbd.util.BitBDUtil
+import com.example.bitbd.util.UserToastCommunicator
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-    private lateinit var preference : BitBDPreferences
+    private lateinit var preference: BitBDPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         setHeaderView(navView)
 
+
     }
 
     fun getNavView(): NavigationView {
@@ -82,32 +90,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setHeaderView(navView: NavigationView) {
-        navView.getHeaderView(0).findViewById<TextView>(R.id.username).text = preference.getName().toString()
+        navView.getHeaderView(0).findViewById<TextView>(R.id.username).text =
+            preference.getName().toString()
 
-        val setMailNumberValue = if(preference.getMobileNumber()?.isNotEmpty() == true){
+        val setMailNumberValue = if (preference.getMobileNumber()?.isNotEmpty() == true) {
             preference.getMobileNumber()
-        } else if(preference.geEmail()?.isNotEmpty() == true){
+        } else if (preference.geEmail()?.isNotEmpty() == true) {
             preference.geEmail()
-        } else{
+        } else {
             ""
         }
         val emailPhone = navView.getHeaderView(0).findViewById<TextView>(R.id.mobileOrEmail)
-        if(setMailNumberValue == ""){
+        if (setMailNumberValue == "") {
             emailPhone.visibility = View.GONE
-        }
-        else emailPhone.text = setMailNumberValue
+        } else emailPhone.text = setMailNumberValue
 
         val profileImage = navView.getHeaderView(0).findViewById<ShapeableImageView>(R.id.imageView)
-        val profileImageLoader = navView.getHeaderView(0).findViewById<LottieAnimationView>(R.id.animation_view)
+        val profileImageLoader =
+            navView.getHeaderView(0).findViewById<LottieAnimationView>(R.id.animation_view)
         val urlProfileImage = BuildConfig.SERVER_URL + preference.getImageUrl()?.toString()
-        BitBDUtil.loadImage(profileImage,profileImageLoader,urlProfileImage,this)
+        BitBDUtil.loadImage(profileImage, profileImageLoader, urlProfileImage, this)
 
 
-        if(preference.getAffiliate()==0){
+        if (preference.getAffiliate() == 0) {
             val item: MenuItem = navView.menu.getItem(5)
             item.isVisible = false
         }
-        if(preference.getAffiliate()==1){
+        if (preference.getAffiliate() == 1) {
             val item: MenuItem = navView.menu.getItem(5)
             item.isVisible = true
         }
@@ -137,14 +146,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun logOutFromApplication(item: MenuItem) {
-        var loading : LoadingProgress? = null
+        var loading: LoadingProgress? = null
 
-        viewModel.progressLogOut.observe(this){
-            if(it != null){
-                if(it) {
-                  loading =  BitBDUtil.showProgress(this@MainActivity)
-                }
-                else {
+        viewModel.progressLogOut.observe(this) {
+            if (it != null) {
+                if (it) {
+                    loading = BitBDUtil.showProgress(this@MainActivity)
+                    BitBDUtil.showMessage("Logout successfully", SUCCESS)
+                } else {
                     loading?.dismiss()
                     redirectToLogIn()
                 }
@@ -156,6 +165,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun redirectToLogIn() {
         preference.logOut()
-        startActivity(Intent(this@MainActivity,LogInActivity::class.java))
+        startActivity(Intent(this@MainActivity, LogInActivity::class.java))
     }
 }

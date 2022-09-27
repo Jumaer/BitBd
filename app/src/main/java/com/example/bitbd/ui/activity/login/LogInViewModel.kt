@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bitbd.constant.ERROR
+import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.constant.networkCall
 import com.example.bitbd.ui.activity.login.model.LogInResponse
 import com.example.bitbd.ui.activity.login.model.UserLogIn
@@ -36,11 +38,12 @@ class LogInViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to log in",context)
+                BitBDUtil.showMessage("Unable to log in", ERROR)
                 return@launch
             }
 
             if (response?.isSuccessful == true && response.body() != null) {
+                 BitBDUtil.showMessage("Login successfully", SUCCESS)
                 _userLogin.value = response.body()
                 _progress.value = false
             } else {

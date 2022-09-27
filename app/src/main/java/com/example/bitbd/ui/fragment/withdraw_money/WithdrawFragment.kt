@@ -37,9 +37,7 @@ class WithdrawFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        val withdrawViewModel =
-            ViewModelProvider(this).get(WithdrawViewModel::class.java)
+       
 
         _binding = FragmentWithdrawBinding.inflate(inflater, container, false)
         val root: View = binding.root

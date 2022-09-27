@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bitbd.constant.ERROR
 import com.example.bitbd.constant.networkCall
 import com.example.bitbd.ui.activity.main.model.LogOutResponse
 import com.example.bitbd.util.BitBDUtil
@@ -31,7 +32,7 @@ class MainViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to log out",context)
+                 BitBDUtil.showMessage("Unable to log out", ERROR)
                 _progressLogOut.value = false
                 return@launch
             }

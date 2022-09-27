@@ -9,6 +9,7 @@ import com.example.bitbd.BuildConfig
 import com.example.bitbd.constant.*
 import com.example.bitbd.sharedPref.BitBDPreferences
 import com.example.bitbd.ui.activity.login.LogInActivity
+import com.example.bitbd.util.BitBDUtil
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -26,6 +27,13 @@ class ApiClient {
 
 
     fun getApiClient(thisContext : Context): Retrofit? {
+
+        if(!BitBDUtil.isNetworkAvailable(thisContext)){
+            BitBDUtil.showMessage("Please check your connection", WARNING)
+            return null
+        }
+
+
         if (retrofit == null) {
 
             val token = BitBDPreferences(thisContext).getAuthToken()
@@ -37,6 +45,9 @@ class ApiClient {
                     .build()
                 val response: Response = chain.proceed(newRequest)
 
+                if(response.code == 200){
+                    return@Interceptor response
+                }
                 if (response.code == 401) {
                     MyApplication.appContext?.apply {
                         BitBDPreferences(this).logOut()
@@ -44,11 +55,12 @@ class ApiClient {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         this.startActivity(intent)
                     }
-                    expectedMessage("Please log in again")
+                    BitBDUtil.showMessage("Please log in again", WARNING)
                     return@Interceptor response
                 }
                 if(response.code == 500){
-                    expectedMessage("Internal server error")
+                    BitBDUtil.showMessage("Sorry for the inconvenience", ERROR)
+                    return@Interceptor response
                 }
                 response.close()
                 chain.proceed(newRequest)
@@ -69,12 +81,7 @@ class ApiClient {
     }
 
 
-    private fun expectedMessage(message : String){
-        val handler = Handler(Looper.getMainLooper())
-        handler.post(Runnable {
-            Toast.makeText(MyApplication.appContext, message, Toast.LENGTH_LONG).show()
-        })
-    }
+
 
 
 

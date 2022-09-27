@@ -12,15 +12,23 @@ import androidx.lifecycle.lifecycleScope
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
+import com.emrekotun.toast.CpmToast.Companion.toastError
+import com.emrekotun.toast.CpmToast.Companion.toastInfo
+import com.emrekotun.toast.CpmToast.Companion.toastSuccess
+import com.emrekotun.toast.CpmToast.Companion.toastWarning
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.constant.DEPOSIT
 import com.example.bitbd.constant.MEDIA_TYPE
+import com.example.bitbd.constant.SUCCESS
+import com.example.bitbd.constant.WARNING
 import com.example.bitbd.databinding.ActivitySubmitDepositBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
+import com.example.bitbd.ui.activity.BaseActivity
 import com.example.bitbd.ui.fragment.deposit.model.PaymentMethod
 import com.example.bitbd.util.BitBDUtil
 import com.example.bitbd.util.ImageHandler
+import com.example.bitbd.util.UserToastCommunicator
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -29,7 +37,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
-class SubmitDepositActivity : AppCompatActivity() {
+class SubmitDepositActivity : BaseActivity() {
     private lateinit var binding: ActivitySubmitDepositBinding
     private var depositSubmit: PaymentMethod? = null
     private lateinit var preference: BitBDPreferences
@@ -75,7 +83,7 @@ class SubmitDepositActivity : AppCompatActivity() {
 
         viewModel.deposit.observe(this){
             if(it != null){
-                it.message?.let { it1 -> BitBDUtil.showMessage(it1,this@SubmitDepositActivity) }
+                it.message?.let { it1 -> BitBDUtil.showMessage(it1, SUCCESS) }
                 loading?.dismiss()
                 preference.setAnyChange(true)
                 onBackPressed()
@@ -120,7 +128,7 @@ class SubmitDepositActivity : AppCompatActivity() {
 
 
         if(multipartImage == null){
-            BitBDUtil.showMessage("Please provide the screen shoot of transaction", this)
+            BitBDUtil.showMessage("Please provide the screen shoot of transaction", WARNING)
             return
         }
 

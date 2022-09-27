@@ -7,16 +7,25 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.emrekotun.toast.CpmToast.Companion.toastError
+import com.emrekotun.toast.CpmToast.Companion.toastInfo
+import com.emrekotun.toast.CpmToast.Companion.toastSuccess
+import com.emrekotun.toast.CpmToast.Companion.toastWarning
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
+import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.util.RunTimeValue
 import com.example.bitbd.databinding.ActivityLogInBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
+import com.example.bitbd.ui.activity.BaseActivity
 import com.example.bitbd.ui.activity.main.MainActivity
 import com.example.bitbd.ui.activity.login.model.UserLogIn
 import com.example.bitbd.util.BitBDUtil
+import com.example.bitbd.util.UserToastCommunicator
+import kotlinx.coroutines.launch
 
-class LogInActivity : AppCompatActivity() {
+class LogInActivity : BaseActivity()  {
     private lateinit var loginViewModel: LogInViewModel
     private lateinit var binding: ActivityLogInBinding
     private lateinit var preference: BitBDPreferences
@@ -36,9 +45,9 @@ class LogInActivity : AppCompatActivity() {
             moveToNextMainPage()
         }
 
-
-
     }
+
+
 
     private fun logInSubmit() {
         try {
@@ -61,8 +70,12 @@ class LogInActivity : AppCompatActivity() {
             binding.passwordLayout.error = getString(R.string.this_field_is_required)
             return
         }
+
         binding.passwordLayout.error = null
-        loginViewModel.login(UserLogIn(username, password = password),this@LogInActivity)
+        lifecycleScope.launch {
+            loginViewModel.login(UserLogIn(username, password),this@LogInActivity)
+        }
+
     }
 
 

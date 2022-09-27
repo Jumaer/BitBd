@@ -6,6 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bitbd.constant.ERROR
+import com.example.bitbd.constant.INFO
+import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.constant.networkCall
 import com.example.bitbd.ui.fragment.deposit.model.BaseDepositResponse
 import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
@@ -47,7 +50,7 @@ class DepositViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to show anything", context)
+                BitBDUtil.showMessage("Unable to show anything", ERROR)
                 _progress.value = false
                 return@launch
             }
@@ -77,7 +80,7 @@ class DepositViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to get payment info", context)
+                BitBDUtil.showMessage("Unable to get payment info", ERROR)
                 _progress.value = false
                 return@launch
             }
@@ -89,7 +92,7 @@ class DepositViewModel : ViewModel() {
                 _progress.value = false
                 if (response?.code() != null) {
                     Log.d("doneValue :: ", response.message())
-                    BitBDUtil.showMessage(response.message(), context)
+                    BitBDUtil.showMessage(response.message(), INFO)
                 }
             }
         }
@@ -110,19 +113,20 @@ class DepositViewModel : ViewModel() {
                 }
 
             } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to delete anything", context)
+                BitBDUtil.showMessage("Unable to delete anything", ERROR)
                 _progress.value = false
                 return@launch
             }
 
             if (response?.isSuccessful == true && response.body() != null) {
                 _depositDelete.value = response.body()
-                 BitBDUtil.showMessage("Refreshing list", context)
+                 BitBDUtil.showMessage("Refreshing list", SUCCESS)
                  deposit(context)
             } else {
                 _progress.value = false
                 if (response?.code() != null) {
                     Log.d("doneValue :: ", response.message())
+                    BitBDUtil.showMessage(response.message(), INFO)
                 }
                 deposit(context)
             }

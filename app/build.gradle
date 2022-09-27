@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.bitbd"
-        minSdk 21
+        minSdk 22
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -99,5 +99,6 @@ dependencies {
     // Glide v4 uses this new annotation processor -- see https://bumptech.github.io/glide/doc/generatedapi.html
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     implementation 'com.github.CanHub:Android-Image-Cropper:4.0.0'
+    implementation 'com.github.emrekotun:CpmToast:1.0.2'
 
 }
