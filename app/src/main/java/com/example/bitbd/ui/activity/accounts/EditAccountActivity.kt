@@ -18,12 +18,13 @@ import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.databinding.ActivityAccountManagementBinding
 import com.example.bitbd.databinding.ActivityEditAccountBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
+import com.example.bitbd.ui.activity.BaseActivity
 import com.example.bitbd.ui.fragment.accounts.AccountViewModel
 import com.example.bitbd.ui.fragment.accounts.model.EditInformationObject
 import com.example.bitbd.util.BitBDUtil
 import kotlinx.coroutines.launch
 
-class EditAccountActivity : AppCompatActivity() {
+class EditAccountActivity : BaseActivity() {
     private lateinit var binding: ActivityEditAccountBinding
     private lateinit var preferences: BitBDPreferences
     lateinit var editableDataObject: EditInformationObject

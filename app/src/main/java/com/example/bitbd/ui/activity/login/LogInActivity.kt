@@ -15,6 +15,7 @@ import com.emrekotun.toast.CpmToast.Companion.toastWarning
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.constant.SUCCESS
+import com.example.bitbd.constant.WARNING
 import com.example.bitbd.util.RunTimeValue
 import com.example.bitbd.databinding.ActivityLogInBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
@@ -42,9 +43,10 @@ class LogInActivity : BaseActivity()  {
             logInSubmit()
         }
 
-        if(preference.getAuthToken()?.isEmpty() == false){
+        if(preference.getAuthToken()?.isEmpty() == false && preference.getPhoneVerifyStatus() == 1){
             moveToNextMainPage()
         }
+
 
     }
 
@@ -100,6 +102,7 @@ class LogInActivity : BaseActivity()  {
             if(it != null){
                 if(it.user?.mobileStatus !=1){
                     preference.putAuthToken(it.authorisation?.token)
+                    it.user?.mobileStatus?.let { it1 -> preference.putPhoneVerifyStatus(it1) }
                     startActivity(Intent(this@LogInActivity, OtpVerifyActivity::class.java))
                     finish()
                     return@observe

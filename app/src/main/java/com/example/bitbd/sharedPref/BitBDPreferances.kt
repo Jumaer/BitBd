@@ -173,6 +173,15 @@ class BitBDPreferences(context: Context) {
     fun getAnyChangeAccount(): Boolean {
         return preferences.getBoolean(IS_LIST_UPDATED_ACCOUNT, false)
     }
+
+
+    fun putPhoneVerifyStatus(status : Int){
+        editor.putInt(MOBILE_STATUS, status)
+        editor.apply()
+    }
+    fun getPhoneVerifyStatus():Int{
+        return preferences.getInt(MOBILE_STATUS, -1)
+    }
     companion object {
         private const val PREFERENCE_TITLE = "bit-bd-Preference"
     }

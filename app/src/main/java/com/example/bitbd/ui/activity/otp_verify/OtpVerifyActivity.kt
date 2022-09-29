@@ -12,11 +12,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.bitbd.R
 import com.example.bitbd.databinding.ActivityOtpVerifyBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
+import com.example.bitbd.ui.activity.BaseActivity
 import com.example.bitbd.ui.activity.login.LogInActivity
 import com.example.bitbd.util.BitBDUtil
 
 
-class OtpVerifyActivity : AppCompatActivity() {
+class OtpVerifyActivity : BaseActivity() {
     private lateinit var binding: ActivityOtpVerifyBinding
     private lateinit var preferences: BitBDPreferences
     private lateinit var appBarConfiguration: AppBarConfiguration
