@@ -1,6 +1,7 @@
 package com.example.bitbd.util
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -13,6 +14,7 @@ import android.text.Editable
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -267,6 +269,38 @@ object BitBDUtil {
 
         return listOfResult
 
+    }
+
+
+
+    fun showAlertDialog(context: Context,
+                        title : String ,
+                        description : String ,
+                        positiveTag : String ,
+                        negativeTag : String , onActionPerform: () -> Unit){
+        // build alert dialog
+        val dialogBuilder = AlertDialog.Builder(context)
+
+        // set message of alert dialog
+        dialogBuilder.setMessage(description)
+            // if the dialog is cancelable
+            .setCancelable(false)
+            // positive button text and action
+            .setPositiveButton(positiveTag, DialogInterface.OnClickListener {
+                    dialog, id -> onActionPerform()
+            })
+            // negative button text and action
+            .setNegativeButton(negativeTag, DialogInterface.OnClickListener {
+                    dialog, id ->
+                dialog.cancel()
+            })
+
+        // create dialog box
+        val alert = dialogBuilder.create()
+        // set title for alert dialog box
+        alert.setTitle(title)
+        // show alert dialog
+        alert.show()
     }
 
 

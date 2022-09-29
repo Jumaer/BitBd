@@ -115,13 +115,15 @@ class MainActivity : BaseActivity() {
         BitBDUtil.loadImage(profileImage, profileImageLoader, urlProfileImage, this)
 
 
-        if (preference.getAffiliate() == 0) {
-            val item: MenuItem = navView.menu.getItem(5)
-            item.isVisible = false
-        }
+
         if (preference.getAffiliate() == 1) {
             val item: MenuItem = navView.menu.getItem(5)
             item.isVisible = true
+        }
+
+        else {
+            val item: MenuItem = navView.menu.getItem(5)
+            item.isVisible = false
         }
     }
 

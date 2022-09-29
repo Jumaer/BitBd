@@ -21,6 +21,7 @@ import com.example.bitbd.sharedPref.BitBDPreferences
 import com.example.bitbd.ui.activity.BaseActivity
 import com.example.bitbd.ui.activity.main.MainActivity
 import com.example.bitbd.ui.activity.login.model.UserLogIn
+import com.example.bitbd.ui.activity.otp_verify.OtpVerifyActivity
 import com.example.bitbd.util.BitBDUtil
 import com.example.bitbd.util.UserToastCommunicator
 import kotlinx.coroutines.launch
@@ -97,8 +98,13 @@ class LogInActivity : BaseActivity()  {
 
         loginViewModel.userLogin.observe(this){
             if(it != null){
+                if(it.user?.mobileStatus !=1){
+                    preference.putAuthToken(it.authorisation?.token)
+                    startActivity(Intent(this@LogInActivity, OtpVerifyActivity::class.java))
+                    finish()
+                    return@observe
+                }
                 RunTimeValue.logInResponse = it
-                it.authorisation?.token
                 preference.putAuthToken(it.authorisation?.token)
                 it.user?.name?.let { it1 -> preference.putName(it1.toString()) }
                 it.user?.mobile?.let { it1 -> preference.putMobileNumber(it1.toString()) }

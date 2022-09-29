@@ -82,4 +82,12 @@
     <string name="accountsEdit">Edit Account</string>
     <string name="trxBranchName">Branch Name</string>
     <string name="enterBranchName">Enter Branch Name</string>
+    <string name="verifyOtp">Verify</string>
+    <string name="sendOtp">Send OTP</string>
+    <string name="mobileNumber">Mobile Number</string>
+    <string name="mobileEnter">ex : 01*******9</string>
+    <string name="submitOtp">Submit OTP</string>
+    <string name="RequestOtp">Request To Verify</string>
+    <string name="verifyYourOtp">Verify OTP</string>
+    <string name="otpHint">00000</string>
 </resources>

@@ -10,6 +10,6 @@
 
     <color name="pending">#FFEB3B</color>
     <color name="approved">#4CAF50</color>
-    <color name="deleteEnable">#DF1313</color>
+    <color name="deleteEnable">#FF0000</color>
     <color name="deleteDisable">#EC6868</color>
 </resources>

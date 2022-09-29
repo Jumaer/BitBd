@@ -179,4 +179,11 @@ interface ApiInterface {
     ):Response<JsonObject>
 
 
+    @FormUrlEncoded
+    @POST("api/v1/send-otp")
+    suspend fun sendOTP(@Field("phone") phone : String):Response<JsonObject>
+
+    @FormUrlEncoded
+    @POST("api/v1/send-otp")
+    suspend fun submitOTP(@Field("otp") otp : String):Response<JsonObject>
 }

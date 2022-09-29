@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/otp_navigation"
+    app:startDestination="@id/numberInputFragment">
+
+    <fragment
+        android:id="@+id/numberInputFragment"
+        android:name="com.example.bitbd.ui.fragment.otp_verify.NumberInputFragment"
+        android:label= "@string/RequestOtp"
+        tools:layout="@layout/fragment_number_input" >
+        <action
+            android:id="@+id/action_numberInputFragment_to_otpInputFragment"
+            app:destination="@id/otpInputFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpInputFragment"
+        android:name="com.example.bitbd.ui.fragment.otp_verify.OtpInputFragment"
+        android:label= "@string/verifyYourOtp"
+        tools:layout="@layout/fragment_otp_input" />
+</navigation>
