@@ -5,7 +5,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Account Settings</string>
 
     <string name="menu_dashboard">Dashboard</string>
     <string name="menu_profile">Profile</string>
@@ -67,4 +67,16 @@
     <string name="balanceHint">"Your available balance is : "</string>
     <string name="withdrawHint">Withdraw Allow Dates :</string>
     <string name="type">Type</string>
+    <string name="commission">Commission</string>
+    <string name="refUser">Reference\n User</string>
+    <string name="accounts">Accounts</string>
+    <string name="accountNo">Acount No</string>
+    <string name="branch">Branch</string>
+    <string name="trxAccountNumber">Account Number</string>
+    <string name="enterArxAccountNumber">Enter Account Number</string>
+    <string name="trxAccountName">Account Name</string>
+    <string name="enterArxAccountName">eg : bKash/nagad/DBBL</string>
+    <string name="RadioButton1">Active</string>
+    <string name="RadioButton2">Inactive</string>
+    <string name="trxAccountStatus">Account Status</string>
 </resources>

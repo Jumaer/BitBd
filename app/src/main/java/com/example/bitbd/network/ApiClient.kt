@@ -48,7 +48,7 @@ class ApiClient {
                 if(response.code == 200){
                     return@Interceptor response
                 }
-                if (response.code == 401) {
+                if (response.code == 401 ) {
                     MyApplication.appContext?.apply {
                         BitBDPreferences(this).logOut()
                         val intent = Intent(this, LogInActivity::class.java)

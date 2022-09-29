@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -32,6 +33,7 @@ import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.databinding.ActivityMainBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
 import com.example.bitbd.ui.activity.BaseActivity
+import com.example.bitbd.ui.activity.accounts.AccountManagementActivity
 import com.example.bitbd.ui.activity.login.LogInActivity
 import com.example.bitbd.ui.activity.main.mainViewModel.MainViewModel
 import com.example.bitbd.ui.activity.notification.NotificationActivity
@@ -40,6 +42,7 @@ import com.example.bitbd.util.UserToastCommunicator
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
 
@@ -136,6 +139,11 @@ class MainActivity : BaseActivity() {
                 startActivity(Intent(this@MainActivity, NotificationActivity::class.java))
                 true
             }
+            R.id.action_settings -> {
+                // Action goes here
+                startActivity(Intent(this@MainActivity, AccountManagementActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -160,7 +168,10 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        viewModel.logOut(this@MainActivity)
+        lifecycleScope.launch{
+            viewModel.logOut(this@MainActivity)
+        }
+
     }
 
     private fun redirectToLogIn() {

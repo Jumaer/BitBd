@@ -22,6 +22,8 @@ import com.bumptech.glide.request.target.Target
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.constant.*
+import com.example.bitbd.ui.fragment.accounts.model.AccountViewObject
+import com.example.bitbd.ui.fragment.affiliate.model.AffiliateObject
 import com.example.bitbd.ui.fragment.deposit.model.DepositDataResponse
 import com.example.bitbd.ui.fragment.profile.ProfileFragment
 import com.example.bitbd.ui.fragment.transaction.model.TransactionObject
@@ -226,6 +228,47 @@ object BitBDUtil {
         return listOfResult
 
     }
+
+    suspend fun getResultListFromAllTypeAffiliateLists(value : String,
+                                               lists : List<List<String>> ,
+                                               searchList : List<AffiliateObject>): MutableList<AffiliateObject> {
+
+        var listOfResult : MutableList<AffiliateObject> = ArrayList()
+
+        for (passList in lists ){
+            val listOfResultBoolean = checkIsValueInList(value,passList)
+            for (i in listOfResultBoolean.indices) {
+                if(listOfResultBoolean[i]){
+                    listOfResult.add(searchList[i])
+                    listOfResult = listOfResult.distinct().toMutableList()
+                }
+            }
+        }
+
+        return listOfResult
+
+    }
+
+    suspend fun getResultListFromAllTypeAccountItemLists(value : String,
+                                                         lists : List<List<String>>,
+                                                         searchList : List<AccountViewObject>): MutableList<AccountViewObject> {
+
+        var listOfResult : MutableList<AccountViewObject> = ArrayList()
+
+        for (passList in lists ){
+            val listOfResultBoolean = checkIsValueInList(value,passList)
+            for (i in listOfResultBoolean.indices) {
+                if(listOfResultBoolean[i]){
+                    listOfResult.add(searchList[i])
+                    listOfResult = listOfResult.distinct().toMutableList()
+                }
+            }
+        }
+
+        return listOfResult
+
+    }
+
 
 
 }

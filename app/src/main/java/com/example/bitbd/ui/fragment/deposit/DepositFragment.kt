@@ -11,11 +11,13 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bitbd.animation.LoadingProgress
 import com.example.bitbd.constant.MESSAGE
+import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.constant.TIME_CREATED
 import com.example.bitbd.constant.TIME_UPDATED
 import com.example.bitbd.databinding.FragmentDepositBinding
@@ -99,7 +101,8 @@ class DepositFragment : Fragment() {
             if (it != null) {
                 if (it) {
                     loading = BitBDUtil.showProgress(requireContext())
-                } else loading?.dismiss()
+                }
+                else loading?.dismiss()
             }
         }
 
@@ -120,6 +123,15 @@ class DepositFragment : Fragment() {
             }
         }
 
+
+        slideshowViewModel?.depositDelete?.observe(viewLifecycleOwner){
+            if(it != null && isDeletePressed){
+                isDeletePressed = false
+                lifecycleScope.launch{
+                    viewModel.deposit(requireContext())
+                }
+            }
+        }
 
 
         lifecycleScope.launch {
@@ -179,6 +191,7 @@ class DepositFragment : Fragment() {
     private var depositItemList: MutableList<DepositDataResponse> = ArrayList()
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("NotifyDataSetChanged")
     private fun createDisplayAdapterForDeposits() {
         adapter = DepositItemAdapter(depositItemList, ::onAdapterItemClick, requireContext())
@@ -187,8 +200,10 @@ class DepositFragment : Fragment() {
         binding.depositRecycle.adapter?.notifyDataSetChanged()
     }
 
-
+    private var isDeletePressed = false
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun onAdapterItemClick(position: Int) {
+            isDeletePressed = true
             lifecycleScope.launch{
                 slideshowViewModel?.deleteDeposit(requireContext(),
                     depositItemListFromServer[position].id.toString())

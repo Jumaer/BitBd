@@ -23,7 +23,7 @@ class MainViewModel : ViewModel() {
 
 
 
-    fun logOut(context : Context){
+    suspend fun logOut(context : Context){
         _progressLogOut.value = true
         viewModelScope.launch {
             val response = try {

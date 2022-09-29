@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:weightSum="5"
+    android:id="@+id/baseItem"
+    android:orientation="horizontal"
+    android:layout_height="64dp">
+
+
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/date"
+        android:id="@+id/Date"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/refUser"
+        android:id="@+id/refUser"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/tryType"
+        android:id="@+id/TrxType"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/trxAmount"
+        android:id="@+id/Amount"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:textColor="@color/black"
+        android:background="@drawable/itemshape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="@string/commission"
+        android:id="@+id/Commission"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"/>
+
+
+
+</LinearLayout>

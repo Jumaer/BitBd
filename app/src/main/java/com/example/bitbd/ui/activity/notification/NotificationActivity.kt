@@ -37,24 +37,7 @@ class NotificationActivity : BaseActivity() {
         title = getString(R.string.notice)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        BitBDUtil.displayMessageFromUi(object : UserToastCommunicator {
-            override fun displayErrorMessage(message: String) {
-                toastError(message)
-            }
 
-            override fun displayInfoMessage(message: String) {
-                toastInfo(message)
-            }
-
-            override fun displaySuccessMessage(message: String) {
-                toastSuccess(message)
-            }
-
-            override fun displayWarningMessage(message: String) {
-                toastWarning(message)
-            }
-
-        })
         viewModel = ViewModelProvider(this)[NotificationViewModel::class.java]
         getNotifications(viewModel)
         createDisplayAdapterForNotifications()

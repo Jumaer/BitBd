@@ -4,6 +4,8 @@ import com.example.bitbd.ui.activity.login.model.UserLogIn
 import com.example.bitbd.ui.activity.main.model.LogOutResponse
 import com.example.bitbd.ui.activity.notification.model.NotificationResponse
 import com.example.bitbd.ui.activity.notification.model.NotificationsBaseResponse
+import com.example.bitbd.ui.fragment.accounts.model.BaseAccountInformationViewResponse
+import com.example.bitbd.ui.fragment.affiliate.model.BaseAffiliateResponse
 import com.example.bitbd.ui.fragment.deposit.model.BaseDepositResponse
 import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
 import com.example.bitbd.ui.fragment.deposit.model.GetPaymentBaseResponse
@@ -138,6 +140,30 @@ interface ApiInterface {
 
     @GET("api/v1/withdraw/{id}/destroy")
     suspend fun deleteItemWithdraw(@Path("id") id: String):Response<JsonObject>
+
+
+    @GET("api/v1/affiliates")
+    suspend fun getAffiliateData():Response<BaseAffiliateResponse>
+
+    @GET("api/v1/account")
+    suspend fun getAccountViewObject():Response<BaseAccountInformationViewResponse>
+
+
+
+    @FormUrlEncoded
+    @POST("api/v1/account/store")
+    suspend fun submitForAddAccount(
+        @Field("name") name: String,
+        @Field("account") account: String,
+        @Field("type") type: String,
+        @Field("status") status: String
+    ):Response<JsonObject>
+
+    @POST("api/v1/account/{id}/destroy")
+    suspend fun deleteAccount(@Path("id") id: String):Response<JsonObject>
+
+
+
 
 
 }

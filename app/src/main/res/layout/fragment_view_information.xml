@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.affiliate.AffiliateFragment">
-
-
+    tools:context=".ui.fragment.accounts.ViewInformationFragment">
     <LinearLayout
         android:id="@+id/appCompatEditTextContainer"
         android:layout_width="match_parent"
@@ -43,11 +41,11 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/layout_affiliate_item" />
+            layout="@layout/layout_account_item" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/affiliateRecycle"
+        android:id="@+id/accountRecycle"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/bottom_shape.xml" value="0.233" />
+        <entry key="app/src/main/res/drawable/edit_background.xml" value="0.2635" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_box_24.xml" value="0.203" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_baseline_camera_click.xml" value="0.233" />
@@ -20,12 +21,14 @@
         <entry key="app/src/main/res/drawable/search_shape.xml" value="0.2695" />
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2165" />
         <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.21887550200803213" />
+        <entry key="app/src/main/res/layout/activity_account_management.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_notification.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_notification_details.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_submit_deposit.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/affiliate_item_recycle.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/custom_dialog_loading.xml" value="0.3229166666666667" />
@@ -41,8 +44,14 @@
         <entry key="app/src/main/res/layout/fragment_search_deposit.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/fragment_transaction.xml" value="0.340625" />
+        <entry key="app/src/main/res/layout/fragment_update_information.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/fragment_view_account.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/fragment_view_account_information.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/fragment_view_information.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/fragment_view_witdraw.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_withdraw.xml" value="0.340625" />
+        <entry key="app/src/main/res/layout/layout_account_item.xml" value="0.25833333333333336" />
+        <entry key="app/src/main/res/layout/layout_affiliate_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_dash_board_ite.xml" value="0.19427083333333334" />
         <entry key="app/src/main/res/layout/layout_deposit_submit_view.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/layout_diposit_item_list.xml" value="0.33" />

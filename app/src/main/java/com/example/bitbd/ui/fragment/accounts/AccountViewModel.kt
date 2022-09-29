@@ -1,4 +1,4 @@
-package com.example.bitbd.ui.fragment.deposit
+package com.example.bitbd.ui.fragment.accounts
 
 import android.content.Context
 import android.util.Log
@@ -7,26 +7,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bitbd.constant.ERROR
-import com.example.bitbd.constant.INFO
 import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.constant.networkCall
-import com.example.bitbd.ui.fragment.deposit.model.BaseDepositResponse
-import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
-import com.example.bitbd.ui.fragment.deposit.model.GetPaymentBaseResponse
+import com.example.bitbd.ui.fragment.accounts.model.BaseAccountInformationViewResponse
 import com.example.bitbd.util.BitBDUtil
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.http.Part
+import retrofit2.http.Field
 
-class DepositViewModel : ViewModel() {
+class AccountViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is deposit Fragment"
+        value = "This is account's Fragment"
     }
     val text: LiveData<String> = _text
 
@@ -36,29 +30,30 @@ class DepositViewModel : ViewModel() {
         get() = _progress
 
 
-    private val _deposit = MutableLiveData<BaseDepositResponse>()
-    val deposit: LiveData<BaseDepositResponse>
-        get() = _deposit
+
+    private val _accountViewObject = MutableLiveData<BaseAccountInformationViewResponse>()
+    val accountViewObject: LiveData<BaseAccountInformationViewResponse>
+        get() = _accountViewObject
 
 
 
 
-    suspend fun deposit(context: Context) {
+    suspend fun getBaseAccountViewInfo(context:Context){
         _progress.value = true
         viewModelScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    networkCall(context)?.deposit()
+                    networkCall(context)?.getAccountViewObject()
                 }
 
-            } catch (e: Exception) {
+            }  catch (e: Exception) {
                 BitBDUtil.showMessage("Unable to show anything", ERROR)
                 _progress.value = false
                 return@launch
             }
 
             if (response?.isSuccessful == true && response.body() != null) {
-                _deposit.value = response.body()
+                _accountViewObject.value = response.body()
             } else {
                 _progress.value = false
                 if (response?.code() != null) {
@@ -69,52 +64,55 @@ class DepositViewModel : ViewModel() {
         }
     }
 
-    private val _payment = MutableLiveData<GetPaymentBaseResponse>()
-    val payment: LiveData<GetPaymentBaseResponse>
-        get() = _payment
+    private val _accountSubmit = MutableLiveData<JsonObject>()
+    val accountSubmit: LiveData<JsonObject>
+        get() = _accountSubmit
 
-    suspend fun getPaymentInfo(context: Context) {
+    suspend fun submitToNew(context:Context,name: String,
+                           account: String,
+                           type: String,
+                           status: String){
         _progress.value = true
         viewModelScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    networkCall(context)?.getPaymentInfo()
+                    networkCall(context)?.submitForAddAccount(name, account, type, status)
                 }
 
-            } catch (e: Exception) {
-                BitBDUtil.showMessage("Unable to get payment info", ERROR)
+            }  catch (e: Exception) {
+                BitBDUtil.showMessage("Unable to submit anything", ERROR)
                 _progress.value = false
                 return@launch
             }
 
             if (response?.isSuccessful == true && response.body() != null) {
-                _payment.value = response.body()
-
+                _progress.value = false
+                _accountSubmit.value = response.body()
             } else {
                 _progress.value = false
                 if (response?.code() != null) {
                     Log.d("doneValue :: ", response.message())
-                    BitBDUtil.showMessage(response.message(), INFO)
                 }
+
             }
         }
     }
 
 
 
-    private val _depositDelete = MutableLiveData<JsonObject>()
-    val depositDelete: LiveData<JsonObject>
-        get() = _depositDelete
+    private val _accountDelete = MutableLiveData<JsonObject>()
+    val accountDelete: LiveData<JsonObject>
+        get() = _accountDelete
 
-    suspend fun deleteDeposit(context: Context, id : String){
+    suspend fun deleteAccount(context:Context,id:String){
         _progress.value = true
         viewModelScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    networkCall(context)?.deleteDeposit(id)
+                    networkCall(context)?.deleteAccount(id)
                 }
 
-            } catch (e: Exception) {
+            }  catch (e: Exception) {
                 BitBDUtil.showMessage("Unable to delete anything", ERROR)
                 _progress.value = false
                 return@launch
@@ -122,18 +120,15 @@ class DepositViewModel : ViewModel() {
 
             if (response?.isSuccessful == true && response.body() != null) {
                 _progress.value = false
-                _depositDelete.value = response.body()
+                _accountDelete.value = response.body()
             } else {
                 _progress.value = false
                 if (response?.code() != null) {
                     Log.d("doneValue :: ", response.message())
-                    BitBDUtil.showMessage(response.message(), INFO)
                 }
-                deposit(context)
+
             }
         }
     }
-
-
 
 }
