@@ -57,10 +57,10 @@ class DepositFragment : Fragment() {
          slideshowViewModel = ViewModelProvider(this)[DepositViewModel::class.java]
          _binding = FragmentDepositBinding.inflate(inflater, container, false)
          val root: View = binding.root
-
+         isDeletePressed = false
          preferences = BitBDPreferences(requireContext())
-        createDisplayAdapterForDeposits()
-        getExpectedData(slideshowViewModel!!)
+         createDisplayAdapterForDeposits()
+         getExpectedData(slideshowViewModel!!)
 
 
 

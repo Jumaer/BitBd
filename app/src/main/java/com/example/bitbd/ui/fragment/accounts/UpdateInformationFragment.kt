@@ -30,7 +30,7 @@ class UpdateInformationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewModel =
+        viewModel =
             ViewModelProvider(this)[AccountViewModel::class.java]
         // Inflate the layout for this fragment
         _binding = FragmentUpdateInformationBinding.inflate(inflater, container, false)
@@ -64,11 +64,23 @@ class UpdateInformationFragment : Fragment() {
         binding.trxAccountNameLayout.error = null
 
 
+
+        if(valueOfBranch.isEmpty() && valueOfType == "Bank"){
+            binding.trxBranchLayout.error = getString(R.string.this_field_is_required)
+            return
+        }
+
+        binding.trxBranchLayout.error = null
+
+
         if(activeStatus == null){
             BitBDUtil.showMessage("Please set the status", INFO)
         }
 
-        if(valueOfType.isEmpty() || valueOfAccountNumber.isEmpty() || valueOfAccountName.isEmpty() || activeStatus == null){
+
+
+
+        if(valueOfType.isEmpty() || valueOfAccountNumber.isEmpty() || valueOfAccountName.isEmpty() || activeStatus == null ){
             return
         }
 
@@ -88,7 +100,7 @@ class UpdateInformationFragment : Fragment() {
                 binding.typeLayout.editText?.text = BitBDUtil.editable("")
                 binding.trxAccountLayout.editText?.text = BitBDUtil.editable("")
                 binding.trxAccountNameLayout.editText?.text = BitBDUtil.editable("")
-
+                binding.trxBranchLayout.editText?.text = BitBDUtil.editable("")
                 seeDisplayDataView()
                 BitBDUtil.showMessage(it.get("message").asString, SUCCESS)
                 loading?.dismiss()
@@ -98,7 +110,7 @@ class UpdateInformationFragment : Fragment() {
 
 
         lifecycleScope.launch{
-            viewModel.submitToNew(requireContext(),valueOfAccountName,valueOfAccountNumber,valueOfType,activeStatus.toString())
+            viewModel.submitToNew(requireContext(),valueOfAccountName,valueOfAccountNumber,valueOfType,activeStatus.toString(),valueOfBranch)
         }
 
     }
@@ -108,6 +120,7 @@ class UpdateInformationFragment : Fragment() {
     private var valueOfType: String = ""
     private var valueOfAccountNumber : String = ""
     private var valueOfAccountName : String = ""
+    private var valueOfBranch : String = ""
     private var activeStatus : Int? = null
 
     private fun seeDisplayDataView() {
@@ -129,9 +142,32 @@ class UpdateInformationFragment : Fragment() {
             if (text?.isNotEmpty() == true) {
                 if(text.toString() == "Mobile Banking"){
                     valueOfType = "Mobile"
+                    valueOfBranch = ""
+                    binding.trxBranchLayout.editText?.text = BitBDUtil.editable("")
+                    binding.branch.visibility = View.GONE
                 }
-                if(text.toString() == "Bank Account"){
+                else if(text.toString() == "Bank Account"){
                     valueOfType = "Bank"
+                    binding.branch.visibility = View.VISIBLE
+                }
+                else{
+                    valueOfType = ""
+                    binding.branch.visibility = View.GONE
+                }
+
+            }
+        }
+
+        binding.trxBranchLayout.editText?.onFocusChangeListener =
+        OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                if(valueOfBranch.isEmpty())
+                    binding.trxBranchLayout.error = getString(R.string.this_field_is_required)
+            } else {
+                binding.trxBranchLayout.editText?.doOnTextChanged{ text, start, before, count ->
+                    if (text?.isNotEmpty() == true && valueOfType == "Bank") {
+                        valueOfBranch = text.toString()
+                    }
                 }
             }
         }

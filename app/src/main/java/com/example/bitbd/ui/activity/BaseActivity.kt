@@ -27,8 +27,8 @@ abstract class BaseActivity() : AppCompatActivity() {
         BitBDUtil.displayMessageFromUi(object : UserToastCommunicator {
             override fun displayErrorMessage(message: String) {
                 val handler = Handler(Looper.getMainLooper())
-                handler.post(Runnable {toastInfo(message)})
-                toastError(message)
+                handler.post(Runnable {toastError(message)})
+
             }
 
             override fun displayInfoMessage(message: String) {

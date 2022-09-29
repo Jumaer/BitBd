@@ -21,6 +21,9 @@
         android:theme="@style/Theme.BitBd"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.accounts.EditAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.accounts.AccountManagementActivity"
             android:exported="false" />
         <activity

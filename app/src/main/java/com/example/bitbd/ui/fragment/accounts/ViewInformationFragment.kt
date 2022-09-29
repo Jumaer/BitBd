@@ -1,6 +1,7 @@
 package com.example.bitbd.ui.fragment.accounts
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,11 +15,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
+import com.example.bitbd.constant.Edit_INFO_OBJECT
 import com.example.bitbd.constant.INFO
 import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.databinding.FragmentUpdateInformationBinding
 import com.example.bitbd.databinding.FragmentViewInformationBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
+import com.example.bitbd.ui.activity.accounts.EditAccountActivity
 import com.example.bitbd.ui.fragment.accounts.adapter.AccountViewItemAdapter
 import com.example.bitbd.ui.fragment.accounts.model.AccountViewObject
 import com.example.bitbd.ui.fragment.affiliate.AffiliateViewModel
@@ -49,6 +52,8 @@ class ViewInformationFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentViewInformationBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        isPressedEdit = false
+        isPressedDelete = false
         preferences = BitBDPreferences(requireContext())
         createDisplayAdapterForDeposits()
         getExpectedData(viewModel)
@@ -91,9 +96,12 @@ class ViewInformationFragment : Fragment() {
         binding.accountRecycle.adapter = adapter
         binding.accountRecycle.adapter?.notifyDataSetChanged()
     }
-
+    private var isPressedEdit = false
     private fun onAdapterItemClick(position: Int) {
-        BitBDUtil.showMessage("Perform EDIT", INFO)
+        lifecycleScope.launch{
+            isPressedEdit = true
+            viewModel.editAccountInformation(requireContext(),serverAccountViewObjectList[position].id.toString())
+        }
 
     }
 
@@ -184,6 +192,16 @@ class ViewInformationFragment : Fragment() {
                 lifecycleScope.launch {
                     viewModel.getBaseAccountViewInfo(requireContext())
                 }
+            }
+        }
+
+
+        viewModel.accountEdit.observe(viewLifecycleOwner){
+            if(it!= null && isPressedEdit){
+                isPressedEdit = false
+                val intent = Intent(requireContext(),EditAccountActivity::class.java)
+                intent.putExtra(Edit_INFO_OBJECT,it.data)
+                startActivity(intent)
             }
         }
 

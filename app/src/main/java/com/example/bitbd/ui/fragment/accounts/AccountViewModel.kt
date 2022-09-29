@@ -10,6 +10,7 @@ import com.example.bitbd.constant.ERROR
 import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.constant.networkCall
 import com.example.bitbd.ui.fragment.accounts.model.BaseAccountInformationViewResponse
+import com.example.bitbd.ui.fragment.accounts.model.BaseResponseEditAccount
 import com.example.bitbd.util.BitBDUtil
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
@@ -71,12 +72,12 @@ class AccountViewModel : ViewModel() {
     suspend fun submitToNew(context:Context,name: String,
                            account: String,
                            type: String,
-                           status: String){
+                           status: String, branch : String){
         _progress.value = true
         viewModelScope.launch {
             val response = try {
                 withContext(Dispatchers.IO) {
-                    networkCall(context)?.submitForAddAccount(name, account, type, status)
+                    networkCall(context)?.submitForAddAccount(name, account, type, status,branch)
                 }
 
             }  catch (e: Exception) {
@@ -130,5 +131,76 @@ class AccountViewModel : ViewModel() {
             }
         }
     }
+
+    private val _accountEdit = MutableLiveData<BaseResponseEditAccount>()
+    val accountEdit: LiveData<BaseResponseEditAccount>
+        get() = _accountEdit
+
+    suspend fun editAccountInformation(context:Context,id:String){
+        _progress.value = true
+        viewModelScope.launch {
+            val response = try {
+                withContext(Dispatchers.IO) {
+                    networkCall(context)?.getEditAccountInformation(id)
+                }
+
+            }  catch (e: Exception) {
+                BitBDUtil.showMessage("Unable to delete anything", ERROR)
+                _progress.value = false
+                return@launch
+            }
+
+            if (response?.isSuccessful == true && response.body() != null) {
+                _progress.value = false
+                _accountEdit.value = response.body()
+            } else {
+                _progress.value = false
+                if (response?.code() != null) {
+                    Log.d("doneValue :: ", response.message())
+                }
+
+            }
+        }
+    }
+
+
+
+
+
+
+    private val _submitEdit = MutableLiveData<JsonObject>()
+    val submitEdit: LiveData<JsonObject>
+        get() = _submitEdit
+
+    suspend fun submitEditInfo(context:Context,name: String,
+                               account: String,
+                               type: String,
+                               status: String, id:String ,  branch : String){
+        _progress.value = true
+        viewModelScope.launch {
+            val response = try {
+                withContext(Dispatchers.IO) {
+                    networkCall(context)?.submitForEditAccount(name, account, type, status, branch, id)
+                }
+
+            }  catch (e: Exception) {
+                BitBDUtil.showMessage("Unable to delete anything", ERROR)
+                _progress.value = false
+                return@launch
+            }
+
+            if (response?.isSuccessful == true && response.body() != null) {
+                _progress.value = false
+                _submitEdit.value = response.body()
+            } else {
+                _progress.value = false
+                if (response?.code() != null) {
+                    Log.d("doneValue :: ", response.message())
+                }
+
+            }
+        }
+    }
+
 
 }

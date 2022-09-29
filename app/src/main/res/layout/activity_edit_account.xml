@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragment.accounts.UpdateInformationFragment">
-
+    tools:context=".ui.activity.accounts.EditAccountActivity">
     <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
-        android:scrollbars="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,15 +21,16 @@
 
 
             <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/trxAccountName"
+                android:textColor="@color/black"
                 android:id="@+id/headingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/trxAccountName"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"  />
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -38,8 +38,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:hint="@string/enterArxAccountName"
+                android:layout_marginTop="8dp"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,23 +48,24 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:maxLength="15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:maxLength="15"
                     android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
 
+
             <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/transAccType"
+                android:textColor="@color/black"
                 android:id="@+id/headingText1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/transAccType"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/trxAccountNameLayout" />
 
@@ -88,16 +89,18 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+
             <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/trxAccountNumber"
+                android:textColor="@color/black"
                 android:id="@+id/headingText3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/trxAccountNumber"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/typeLayout" />
+
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -105,8 +108,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:hint="@string/enterArxAccountNumber"
+                android:layout_marginTop="8dp"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,30 +118,30 @@
 
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:maxLength="15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:maxLength="15"
                     android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/trxAccountStatus"
+                android:textColor="@color/black"
                 android:id="@+id/headingText4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/trxAccountStatus"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/trxAccountLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/trxAccountLayout"/>
 
             <RadioGroup
+                android:layout_marginTop="16dp"
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:background="#024CAF50"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/headingText4">
@@ -162,25 +165,26 @@
             </RadioGroup>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@id/branch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:id="@id/branch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <TextView
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="@string/trxBranchName"
+                    android:textColor="@color/black"
                     android:id="@+id/headingText5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/trxBranchName"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"  />
+
 
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -188,8 +192,8 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:hint="@string/enterBranchName"
+                    android:layout_marginTop="8dp"
                     app:errorEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -198,10 +202,10 @@
 
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:maxLength="15"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:maxLength="15"
                         android:textSize="16sp" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -209,13 +213,17 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+
+
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/submitButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="32dp"
-                android:padding="16dp"
                 android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textSize="16sp"

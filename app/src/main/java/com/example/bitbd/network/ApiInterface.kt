@@ -5,6 +5,7 @@ import com.example.bitbd.ui.activity.main.model.LogOutResponse
 import com.example.bitbd.ui.activity.notification.model.NotificationResponse
 import com.example.bitbd.ui.activity.notification.model.NotificationsBaseResponse
 import com.example.bitbd.ui.fragment.accounts.model.BaseAccountInformationViewResponse
+import com.example.bitbd.ui.fragment.accounts.model.BaseResponseEditAccount
 import com.example.bitbd.ui.fragment.affiliate.model.BaseAffiliateResponse
 import com.example.bitbd.ui.fragment.deposit.model.BaseDepositResponse
 import com.example.bitbd.ui.fragment.deposit.model.DepositSubmit
@@ -156,14 +157,26 @@ interface ApiInterface {
         @Field("name") name: String,
         @Field("account") account: String,
         @Field("type") type: String,
-        @Field("status") status: String
+        @Field("status") status: String,
+        @Field("branch") branch: String
     ):Response<JsonObject>
 
     @POST("api/v1/account/{id}/destroy")
     suspend fun deleteAccount(@Path("id") id: String):Response<JsonObject>
 
+    @GET("api/v1/account/{id}/edit")
+    suspend fun getEditAccountInformation(@Path("id") id: String):Response<BaseResponseEditAccount>
 
-
+    @FormUrlEncoded
+    @POST("api/v1/account/{id}/update")
+    suspend fun submitForEditAccount(
+        @Field("name") name: String,
+        @Field("account") account: String,
+        @Field("type") type: String,
+        @Field("status") status: String,
+        @Field("branch") branch: String,
+        @Path("id") id: String
+    ):Response<JsonObject>
 
 
 }

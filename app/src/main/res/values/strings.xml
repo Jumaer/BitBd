@@ -79,4 +79,7 @@
     <string name="RadioButton1">Active</string>
     <string name="RadioButton2">Inactive</string>
     <string name="trxAccountStatus">Account Status</string>
+    <string name="accountsEdit">Edit Account</string>
+    <string name="trxBranchName">Branch Name</string>
+    <string name="enterBranchName">Enter Branch Name</string>
 </resources>

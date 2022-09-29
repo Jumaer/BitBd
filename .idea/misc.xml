@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.2165" />
         <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.21887550200803213" />
         <entry key="app/src/main/res/layout/activity_account_management.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/activity_edit_account.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.340625" />
