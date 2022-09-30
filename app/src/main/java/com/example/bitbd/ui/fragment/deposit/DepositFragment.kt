@@ -200,14 +200,24 @@ class DepositFragment : Fragment() {
         binding.depositRecycle.adapter?.notifyDataSetChanged()
     }
 
+    private var currentPosition: Int? = null
     private var isDeletePressed = false
     @RequiresApi(Build.VERSION_CODES.O)
     private fun onAdapterItemClick(position: Int) {
-            isDeletePressed = true
-            lifecycleScope.launch{
-                slideshowViewModel?.deleteDeposit(requireContext(),
-                    depositItemListFromServer[position].id.toString())
-            }
+        currentPosition = position
+        BitBDUtil.showAlertDialog(requireContext(),
+            "Attention!",
+            "Do you really want to delete this ?",
+            "Agree","Cancel",::performDeleteInfo)
+
+    }
+
+    private fun performDeleteInfo() {
+        isDeletePressed = true
+        lifecycleScope.launch{
+            slideshowViewModel?.deleteDeposit(requireContext(),
+                depositItemListFromServer[currentPosition!!].id.toString())
+        }
     }
 
 

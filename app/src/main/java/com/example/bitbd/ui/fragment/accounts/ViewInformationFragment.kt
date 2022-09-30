@@ -98,18 +98,28 @@ class ViewInformationFragment : Fragment() {
     }
     private var isPressedEdit = false
     private fun onAdapterItemClick(position: Int) {
-        lifecycleScope.launch{
-            isPressedEdit = true
-            viewModel.editAccountInformation(requireContext(),serverAccountViewObjectList[position].id.toString())
-        }
+        currentPosition = position
+        BitBDUtil.showAlertDialog(requireContext(),
+            "Attention!",
+            "Do you really want to edit ?",
+            "Agree","Cancel",::performEditInfo)
 
     }
 
     private var isPressedDelete = false
     private fun onDeleteItemClick(position: Int){
+        currentPosition = position
+        BitBDUtil.showAlertDialog(requireContext(),
+            "Attention!",
+            "Do you really want to delete this ?",
+            "Agree","Cancel",::performDeleteInfo)
+
+    }
+
+    private fun performDeleteInfo() {
         lifecycleScope.launch{
             isPressedDelete = true
-            viewModel.deleteAccount(requireContext(),serverAccountViewObjectList[position].id.toString())
+            viewModel.deleteAccount(requireContext(),serverAccountViewObjectList[currentPosition!!].id.toString())
         }
     }
 
@@ -227,4 +237,13 @@ class ViewInformationFragment : Fragment() {
         }
     }
 
+    var currentPosition : Int? = null
+    private fun performEditInfo() {
+        lifecycleScope.launch{
+            isPressedEdit = true
+            viewModel.editAccountInformation(requireContext(),serverAccountViewObjectList[currentPosition!!].id.toString())
+        }
+    }
 }
+
+

@@ -99,13 +99,21 @@ class ViewWithdrawFragment : Fragment() {
         binding.withdrawRecycle.adapter = adapter
         binding.withdrawRecycle.adapter?.notifyDataSetChanged()
     }
-
+    private var currentPosition: Int? = null
     private fun onAdapterItemClick(position: Int) {
-           val withdrawItem = withdrawItemListFromServer[position]
-           lifecycleScope.launch{
-               slideshowViewModel?.withdrawItemDelete(requireContext(), withdrawItem.id.toString())
-           }
+        currentPosition = position
+        BitBDUtil.showAlertDialog(requireContext(),
+            "Attention!",
+            "Do you really want to delete this ?",
+            "Agree","Cancel",::performDeleteInfo)
 
+    }
+
+    private fun performDeleteInfo() {
+        val withdrawItem = withdrawItemListFromServer[currentPosition!!]
+        lifecycleScope.launch{
+            slideshowViewModel?.withdrawItemDelete(requireContext(), withdrawItem.id.toString())
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")

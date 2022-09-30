@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.emrekotun.toast.CpmToast.Companion.toastError
 import com.emrekotun.toast.CpmToast.Companion.toastInfo
 import com.emrekotun.toast.CpmToast.Companion.toastSuccess
@@ -51,4 +52,6 @@ abstract class BaseActivity() : AppCompatActivity() {
 
         })
     }
+
+
 }

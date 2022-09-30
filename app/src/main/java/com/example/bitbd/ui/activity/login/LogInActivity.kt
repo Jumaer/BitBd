@@ -100,9 +100,9 @@ class LogInActivity : BaseActivity()  {
 
         loginViewModel.userLogin.observe(this){
             if(it != null){
+                it.user?.mobileStatus?.let { it1 -> preference.putPhoneVerifyStatus(it1) }
                 if(it.user?.mobileStatus !=1){
                     preference.putAuthToken(it.authorisation?.token)
-                    it.user?.mobileStatus?.let { it1 -> preference.putPhoneVerifyStatus(it1) }
                     startActivity(Intent(this@LogInActivity, OtpVerifyActivity::class.java))
                     finish()
                     return@observe

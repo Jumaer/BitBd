@@ -73,7 +73,20 @@ class AddNewWithdrawFragment : Fragment() {
                 val dataResponseList = baseResponse.accounts ?: return@observe
                 typeList.clear()
                 for (typeGet in dataResponseList) {
-                    typeList.add(typeGet.type.toString())
+                    typeList.add(typeGet.type.toString().trim())
+                    typeList = typeList.distinct().toMutableList()
+                }
+                typeListToDisplay.clear()
+                for (typeGet in typeList){
+                    if(typeGet.trim() == "Mobile"){
+                        typeListToDisplay.add("Mobile Banking")
+                    }
+                    else if(typeGet.trim() == "Bank"){
+                        typeListToDisplay.add("Bank Account")
+                    }
+                    else{
+                        typeListToDisplay.add(typeGet.trim())
+                    }
                 }
 
                 var dateList = ""
@@ -187,11 +200,11 @@ class AddNewWithdrawFragment : Fragment() {
         }
     }
 
-
-    private var typeList = ArrayList<String>()
+    private var typeListToDisplay : MutableList<String> = ArrayList()
+    private var typeList : MutableList<String> = ArrayList()
     private var valueOfType: String = ""
 
-    private var accountList = ArrayList<String>()
+    private var accountList : MutableList<String> = ArrayList()
     private var valueOfAccount: String = ""
 
     private fun setTextChangeListener(
@@ -203,7 +216,7 @@ class AddNewWithdrawFragment : Fragment() {
         context?.let {
             ArrayAdapter(
                 it, android.R.layout.simple_list_item_1,
-                typeList
+                typeListToDisplay
             ).also { adapter ->
                 binding.typeTextView.setAdapter(adapter)
                 adapter.notifyDataSetChanged()
@@ -211,31 +224,33 @@ class AddNewWithdrawFragment : Fragment() {
         }
         binding.typeLayout.editText?.doOnTextChanged { text, start, before, count ->
             if (text?.isNotEmpty() == true) {
-                valueOfType = text.toString()
-
-                val tempAccountList = ArrayList<String>()
+                valueOfType = if(text.toString().trim() == "Mobile Banking"){
+                    "Mobile"
+                } else if(text.toString().trim() == "Bank Account"){
+                    "Bank"
+                } else{
+                    text.toString().trim()
+                }
+                val tempAccountList : MutableList<String> = ArrayList()
                 for (i in dataList) {
                     if (i.type.toString() == valueOfType) {
                         tempAccountList.add(i.name.toString())
                     }
                 }
-                accountList = tempAccountList
-
+                accountList = tempAccountList.distinct().toMutableList()
                 context?.let {
                     ArrayAdapter(
                         it, android.R.layout.simple_list_item_1,
                         accountList
                     ).also { adapter ->
                         binding.accountTextView.setAdapter(adapter)
-                        adapter.notifyDataSetChanged()
                         if (accountList.size > 0)
-                            binding.accountTextView.text = BitBDUtil.editable(accountList[0])
-
+                            binding.accountTextView.text = BitBDUtil.editable("")
+                        adapter.notifyDataSetChanged()
                     }
                 }
             }
         }
-
         binding.accountLayout.setOnKeyListener(null)
         binding.accountTextView.inputType = InputType.TYPE_NULL
 

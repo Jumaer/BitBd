@@ -1,13 +1,15 @@
 package com.example.bitbd.ui.activity.main
 
+
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.webkit.WebSettings
+import android.webkit.WebViewClient
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -17,15 +19,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.airbnb.lottie.LottieAnimationView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.emrekotun.toast.CpmToast.Companion.toastError
-import com.emrekotun.toast.CpmToast.Companion.toastInfo
-import com.emrekotun.toast.CpmToast.Companion.toastSuccess
-import com.emrekotun.toast.CpmToast.Companion.toastWarning
 import com.example.bitbd.BuildConfig
 import com.example.bitbd.R
 import com.example.bitbd.animation.LoadingProgress
@@ -38,11 +31,10 @@ import com.example.bitbd.ui.activity.login.LogInActivity
 import com.example.bitbd.ui.activity.main.mainViewModel.MainViewModel
 import com.example.bitbd.ui.activity.notification.NotificationActivity
 import com.example.bitbd.util.BitBDUtil
-import com.example.bitbd.util.UserToastCommunicator
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+
 
 class MainActivity : BaseActivity() {
 
@@ -61,8 +53,7 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your chatting action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+          //  openChatView(binding)
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -156,14 +147,22 @@ class MainActivity : BaseActivity() {
     }
 
     fun logOutFromApplication(item: MenuItem) {
-        var loading: LoadingProgress? = null
 
+        BitBDUtil.showAlertDialog(this@MainActivity,
+            "Attention!",
+            "Do you really want to log out ?",
+            "Agree","Cancel",::performLogOut)
+
+    }
+
+    private fun performLogOut() {
+        var loading: LoadingProgress? = null
         viewModel.progressLogOut.observe(this) {
             if (it != null) {
                 if (it) {
                     loading = BitBDUtil.showProgress(this@MainActivity)
-                    BitBDUtil.showMessage("Logout successfully", SUCCESS)
                 } else {
+                    BitBDUtil.showMessage("Logout successfully", SUCCESS)
                     loading?.dismiss()
                     redirectToLogIn()
                 }
@@ -173,11 +172,31 @@ class MainActivity : BaseActivity() {
         lifecycleScope.launch{
             viewModel.logOut(this@MainActivity)
         }
-
     }
 
     private fun redirectToLogIn() {
         preference.logOut()
         startActivity(Intent(this@MainActivity, LogInActivity::class.java))
     }
-}
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun openChatView(bind: ActivityMainBinding){
+        bind.appBarMain.activityMainWebview.visibility = View.VISIBLE
+        val webView = bind.appBarMain.mainWebview
+
+        webView.settings.javaScriptEnabled = true;
+        webView.settings.loadWithOverviewMode = true;
+        webView.settings.useWideViewPort = true;
+        webView.webViewClient = WebViewClient()
+
+//        webView.loadData("<html><body>Hello, world!</body></html>",
+//            "text/html", "UTF-8");
+
+        webView.loadUrl("file:///android_asset/"+"message"+".html");
+
+    }
+
+        // If you deal with HTML then execute loadData instead of loadUrl
+        //webView.loadData("YOUR HTML CONTENT","text/html", "UTF-8");
+
+    }

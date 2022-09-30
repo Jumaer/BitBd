@@ -125,7 +125,7 @@ class OtpInputFragment : Fragment() {
         lifecycleScope.launch {
             // time count down for seconds,
             // with 1 second as countDown interval
-            object : CountDownTimer(18000, 1000) {
+            object : CountDownTimer(180000, 1000) {
 
                 // Callback function, fired on regular interval
                 @SuppressLint("SetTextI18n")

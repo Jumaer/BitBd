@@ -34,7 +34,7 @@ class MainViewModel : ViewModel() {
             } catch (e: Exception) {
                  BitBDUtil.showMessage("Unable to log out", ERROR)
                 _progressLogOut.value = false
-                return@launch
+                 return@launch
             }
 
             if (response?.code()== 200 ) {
