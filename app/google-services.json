@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1012911517685",
+    "project_id": "bitbd-f3a9a",
+    "storage_bucket": "bitbd-f3a9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012911517685:android:153f3aca5df2dc25363abc",
+        "android_client_info": {
+          "package_name": "com.example.bitbd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012911517685-3fo9qhgktf0ac5bqphnpacmub8ea07q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC10VvpM5_8zJ6_e1y5qkcJ2zMDXgYeeKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012911517685-3fo9qhgktf0ac5bqphnpacmub8ea07q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

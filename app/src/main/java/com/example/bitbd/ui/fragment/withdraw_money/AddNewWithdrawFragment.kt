@@ -222,7 +222,7 @@ class AddNewWithdrawFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         }
-        binding.typeLayout.editText?.doOnTextChanged { text, start, before, count ->
+        binding.typeLayout.editText?.doOnTextChanged { text, _, _, _ ->
             if (text?.isNotEmpty() == true) {
                 valueOfType = if(text.toString().trim() == "Mobile Banking"){
                     "Mobile"
@@ -254,7 +254,7 @@ class AddNewWithdrawFragment : Fragment() {
         binding.accountLayout.setOnKeyListener(null)
         binding.accountTextView.inputType = InputType.TYPE_NULL
 
-        binding.accountLayout.editText?.doOnTextChanged { text, start, before, count ->
+        binding.accountLayout.editText?.doOnTextChanged { text, _, _, _ ->
             if (text?.isNotEmpty() == true) {
                 valueOfAccount = text.toString()
             }

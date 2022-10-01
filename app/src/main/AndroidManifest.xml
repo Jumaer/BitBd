@@ -19,7 +19,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitBd"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activity.ChatActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.otp_verify.OtpVerifyActivity"
             android:exported="false" />

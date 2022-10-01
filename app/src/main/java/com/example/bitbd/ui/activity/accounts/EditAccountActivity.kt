@@ -160,12 +160,12 @@ class EditAccountActivity : BaseActivity() {
 
 
         binding.trxAccountLayout.editText?.onFocusChangeListener =
-            View.OnFocusChangeListener { v, hasFocus ->
+            View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     if (valueOfAccountNumber.isEmpty())
                         binding.trxAccountLayout.error = getString(R.string.this_field_is_required)
                 } else {
-                    binding.trxAccountLayout.editText?.doOnTextChanged { text, start, before, count ->
+                    binding.trxAccountLayout.editText?.doOnTextChanged { text, _, _, _ ->
                         if (text?.isNotEmpty() == true) {
                             valueOfAccountNumber = text.toString()
                         }
@@ -174,13 +174,13 @@ class EditAccountActivity : BaseActivity() {
             }
 
         binding.trxAccountNameLayout.editText?.onFocusChangeListener =
-            View.OnFocusChangeListener { v, hasFocus ->
+            View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     if (valueOfAccountName.isEmpty())
                         binding.trxAccountNameLayout.error =
                             getString(R.string.this_field_is_required)
                 } else {
-                    binding.trxAccountNameLayout.editText?.doOnTextChanged { text, start, before, count ->
+                    binding.trxAccountNameLayout.editText?.doOnTextChanged { text, _, _, _ ->
                         if (text?.isNotEmpty() == true) {
                             valueOfAccountName = text.toString()
                         }
@@ -189,12 +189,12 @@ class EditAccountActivity : BaseActivity() {
             }
 
         binding.trxBranchLayout.editText?.onFocusChangeListener =
-            View.OnFocusChangeListener { v, hasFocus ->
+            View.OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     if (valueOfBranch.isEmpty())
                         binding.trxBranchLayout.error = getString(R.string.this_field_is_required)
                 } else {
-                    binding.trxBranchLayout.editText?.doOnTextChanged { text, start, before, count ->
+                    binding.trxBranchLayout.editText?.doOnTextChanged { text, _, _, _ ->
                         if (text?.isNotEmpty() == true && valueOfType == "Bank") {
                             valueOfBranch = text.toString()
                         }

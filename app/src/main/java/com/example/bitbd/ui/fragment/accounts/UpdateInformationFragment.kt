@@ -159,12 +159,12 @@ class UpdateInformationFragment : Fragment() {
         }
 
         binding.trxBranchLayout.editText?.onFocusChangeListener =
-        OnFocusChangeListener { v, hasFocus ->
+        OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 if(valueOfBranch.isEmpty())
                     binding.trxBranchLayout.error = getString(R.string.this_field_is_required)
             } else {
-                binding.trxBranchLayout.editText?.doOnTextChanged{ text, start, before, count ->
+                binding.trxBranchLayout.editText?.doOnTextChanged{ text, _, _, _ ->
                     if (text?.isNotEmpty() == true && valueOfType == "Bank") {
                         valueOfBranch = text.toString()
                     }
@@ -175,12 +175,12 @@ class UpdateInformationFragment : Fragment() {
 
 
         binding.trxAccountLayout.editText?.onFocusChangeListener =
-            OnFocusChangeListener { v, hasFocus ->
+            OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     if(valueOfAccountNumber.isEmpty())
                     binding.trxAccountLayout.error = getString(R.string.this_field_is_required)
                 } else {
-                    binding.trxAccountLayout.editText?.doOnTextChanged{ text, start, before, count ->
+                    binding.trxAccountLayout.editText?.doOnTextChanged{ text, _, _, _ ->
                         if (text?.isNotEmpty() == true) {
                             valueOfAccountNumber = text.toString()
                         }
@@ -188,12 +188,12 @@ class UpdateInformationFragment : Fragment() {
                 }
             }
 
-        binding.trxAccountNameLayout.editText?.onFocusChangeListener =   OnFocusChangeListener { v, hasFocus ->
+        binding.trxAccountNameLayout.editText?.onFocusChangeListener =   OnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 if(valueOfAccountName.isEmpty())
                 binding.trxAccountNameLayout.error = getString(R.string.this_field_is_required)
             } else {
-                binding.trxAccountNameLayout.editText?.doOnTextChanged{ text, start, before, count ->
+                binding.trxAccountNameLayout.editText?.doOnTextChanged{ text, _, _, _ ->
                     if (text?.isNotEmpty() == true) {
                         valueOfAccountName = text.toString()
                     }

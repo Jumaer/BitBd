@@ -22,23 +22,15 @@
 
     <include layout="@layout/content_main" />
 
-    <androidx.cardview.widget.CardView
-        android:visibility="gone"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="88dp"
-        android:id="@+id/activity_main_webview"
-        android:layout_width="match_parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_height="300dp" >
-        <WebView
-            android:background="@drawable/payment_shape"
-            android:id="@+id/main_webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </androidx.cardview.widget.CardView>
+
+<!--        <WebView-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_gravity="bottom|end"-->
+<!--            android:background="@drawable/payment_shape"-->
+<!--            android:id="@+id/main_webview"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
+
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

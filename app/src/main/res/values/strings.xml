@@ -90,4 +90,6 @@
     <string name="RequestOtp">Request To Verify</string>
     <string name="verifyYourOtp">Verify OTP</string>
     <string name="otpHint">00000</string>
+    <string name="messageUs">Message To BIT BD</string>
+    <string name="jivosdk_welcome">Hello, how can we help you ?</string>
 </resources>

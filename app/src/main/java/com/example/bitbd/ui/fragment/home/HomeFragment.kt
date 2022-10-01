@@ -2,6 +2,7 @@ package com.example.bitbd.ui.fragment.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -97,7 +98,7 @@ class HomeFragment : Fragment() {
 
     private fun onAdapterItemClick(position: Int) {
 
-
+        Log.d("Implement" , "Not yet for $position")
     }
 
     override fun onDestroyView() {

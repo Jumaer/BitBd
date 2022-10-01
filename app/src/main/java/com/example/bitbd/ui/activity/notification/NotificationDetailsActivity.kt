@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import com.emrekotun.toast.CpmToast.Companion.toastError
@@ -50,6 +51,7 @@ class NotificationDetailsActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun loadViewOfNotice(message: String, createdTime: String, updatedTime: String) {
+        Log.d("Implement" , "Not yet for $updatedTime")
         binding.messageNotification.text = message
         binding.dateNotification.text ="Date : " + ZonedDateTime.parse(createdTime)
             .format(

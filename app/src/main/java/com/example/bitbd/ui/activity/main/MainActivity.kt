@@ -4,11 +4,11 @@ package com.example.bitbd.ui.activity.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.webkit.WebSettings
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +26,7 @@ import com.example.bitbd.constant.SUCCESS
 import com.example.bitbd.databinding.ActivityMainBinding
 import com.example.bitbd.sharedPref.BitBDPreferences
 import com.example.bitbd.ui.activity.BaseActivity
+import com.example.bitbd.ui.activity.ChatActivity
 import com.example.bitbd.ui.activity.accounts.AccountManagementActivity
 import com.example.bitbd.ui.activity.login.LogInActivity
 import com.example.bitbd.ui.activity.main.mainViewModel.MainViewModel
@@ -52,8 +53,9 @@ class MainActivity : BaseActivity() {
         preference = BitBDPreferences(this@MainActivity)
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        binding.appBarMain.fab.setOnClickListener { view ->
-          //  openChatView(binding)
+        binding.appBarMain.fab.setOnClickListener { _ ->
+            // openChatView(binding)
+            startActivity(Intent(this,ChatActivity::class.java))
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -146,8 +148,9 @@ class MainActivity : BaseActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    @SuppressLint("LogNotTimber")
     fun logOutFromApplication(item: MenuItem) {
-
+        Log.d("Implement" , "Not yet for $item")
         BitBDUtil.showAlertDialog(this@MainActivity,
             "Attention!",
             "Do you really want to log out ?",
@@ -179,24 +182,21 @@ class MainActivity : BaseActivity() {
         startActivity(Intent(this@MainActivity, LogInActivity::class.java))
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun openChatView(bind: ActivityMainBinding){
-        bind.appBarMain.activityMainWebview.visibility = View.VISIBLE
-        val webView = bind.appBarMain.mainWebview
+//    @SuppressLint("SetJavaScriptEnabled")
+//    private fun openChatView(bind: ActivityMainBinding){
+////        val webView = bind.appBarMain.mainWebview
+////        webView.visibility = View.VISIBLE
+////        val webSettings: WebSettings = webView.settings
+////        webSettings.javaScriptEnabled = true
+////        webView.loadUrl("file:///android_asset/index.html");
+//
+//    }
 
-        webView.settings.javaScriptEnabled = true;
-        webView.settings.loadWithOverviewMode = true;
-        webView.settings.useWideViewPort = true;
-        webView.webViewClient = WebViewClient()
 
-//        webView.loadData("<html><body>Hello, world!</body></html>",
-//            "text/html", "UTF-8");
 
-        webView.loadUrl("file:///android_asset/"+"message"+".html");
 
-    }
 
-        // If you deal with HTML then execute loadData instead of loadUrl
-        //webView.loadData("YOUR HTML CONTENT","text/html", "UTF-8");
+
 
     }
+

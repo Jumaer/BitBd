@@ -287,11 +287,13 @@ object BitBDUtil {
             .setCancelable(false)
             // positive button text and action
             .setPositiveButton(positiveTag, DialogInterface.OnClickListener {
-                    dialog, id -> onActionPerform()
+                    dialog, _ ->
+                dialog.cancel()
+                onActionPerform()
             })
             // negative button text and action
             .setNegativeButton(negativeTag, DialogInterface.OnClickListener {
-                    dialog, id ->
+                    dialog, _ ->
                 dialog.cancel()
             })
 

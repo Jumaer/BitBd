@@ -11,12 +11,16 @@
         <entry key="app/src/main/res/drawable/ic_baseline_horizontal_rule_24.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.2165" />
         <entry key="app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.226" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.174" />
+        <entry key="app/src/main/res/drawable/ic_menu_affiliate.xml" value="0.174" />
+        <entry key="app/src/main/res/drawable/ic_menu_transaction.xml" value="0.174" />
         <entry key="app/src/main/res/drawable/ic_round_shape.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/item_shape_approved.xml" value="0.202" />
         <entry key="app/src/main/res/drawable/item_shape_delete.xml" value="0.202" />
         <entry key="app/src/main/res/drawable/item_shape_not_delete.xml" value="0.202" />
         <entry key="app/src/main/res/drawable/item_shape_pending.xml" value="0.202" />
         <entry key="app/src/main/res/drawable/itemshape.xml" value="0.2875" />
+        <entry key="app/src/main/res/drawable/jivo_drawable.xml" value="0.173" />
         <entry key="app/src/main/res/drawable/otp_shape.xml" value="0.173" />
         <entry key="app/src/main/res/drawable/payment_shape.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/search_shape.xml" value="0.2695" />
@@ -24,6 +28,7 @@
         <entry key="app/src/main/res/layout-v23/fragment_otp_input.xml" value="0.35625" />
         <entry key="app/src/main/res/layout-w1240dp/activity_login.xml" value="0.21887550200803213" />
         <entry key="app/src/main/res/layout/activity_account_management.xml" value="0.259375" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.1484375" />
         <entry key="app/src/main/res/layout/activity_edit_account.xml" value="0.259375" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.340625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.340625" />
