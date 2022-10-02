@@ -36,11 +36,16 @@ class WithdrawItemsAdapter (
         }
 
         override fun onClick(p0: View?) {
-            if(withdrawItemList[adapterPosition].status == "Decline"){
-                BitBDUtil.showMessage("Already Declined", INFO)
-            }
-            else{
-                onItemClicked(adapterPosition)
+            when (withdrawItemList[bindingAdapterPosition].status) {
+                "Decline" -> {
+                    BitBDUtil.showMessage("Already Declined", INFO)
+                }
+                "Approved" -> {
+                    BitBDUtil.showMessage("Already Approved", INFO)
+                }
+                else -> {
+                    onItemClicked(bindingAdapterPosition)
+                }
             }
 
         }
@@ -79,14 +84,35 @@ class WithdrawItemsAdapter (
                 binding.Amount.text = this.amount.toString()
                 binding.TrxAccNumber.text = this.withdrawAccount
                 binding.Status.text = this.status
-                if(this.status == "Decline"){
-                    binding.Status.background = ContextCompat.getDrawable(context,
-                        R.drawable.item_shape_delete
-                    )
+                when (this.status) {
+                    "Pending" -> {
+                        binding.Status.background = ContextCompat.getDrawable(context,
+                            R.drawable.item_shape_pending
+                        )
+                        binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
 
-                    binding.ActionPerform.background = ContextCompat.getDrawable(context,
-                        R.drawable.item_shape_not_delete
-                    )
+                        binding.ActionPerform.background = ContextCompat.getDrawable(context,
+                            R.drawable.item_shape_delete
+                        )
+                    }
+                    "Approved" -> {
+                        binding.Status.background = ContextCompat.getDrawable(context,
+                            R.drawable.item_shape_approved
+                        )
+                        binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
+                        binding.ActionPerform.background = ContextCompat.getDrawable(context,
+                            R.drawable.item_shape_not_delete
+                        )
+                    }
+                    "Decline" -> {
+                        binding.Status.background = ContextCompat.getDrawable(context,
+                            R.drawable.item_shape_delete
+                        )
+                        binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
+                        binding.ActionPerform.background = ContextCompat.getDrawable(context,
+                            R.drawable.item_shape_not_delete
+                        )
+                    }
                 }
 
                 binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))

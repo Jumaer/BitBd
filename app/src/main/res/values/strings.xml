@@ -23,7 +23,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="username">UserID or Email</string>
+    <string name="username">UserID</string>
     <string name="usernameEnter">Enter your username</string>
     <string name="password">Password</string>
     <string name="passwordEnter">Enter your password</string>

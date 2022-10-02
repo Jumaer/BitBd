@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="pending">#FFEB3B</color>
-    <color name="approved">#4CAF50</color>
+    <color name="pending">#E9D101</color>
+    <color name="approved">#227526</color>
     <color name="deleteEnable">#FF0000</color>
     <color name="deleteDisable">#EC6868</color>
 </resources>

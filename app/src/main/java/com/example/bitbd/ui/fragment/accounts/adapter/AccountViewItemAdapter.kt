@@ -27,10 +27,10 @@ class AccountViewItemAdapter (private val itemList: List<AccountViewObject>,
 
         init {
             binding.deletePerform.setOnClickListener {
-                onDeleteClicked(adapterPosition)
+                onDeleteClicked(bindingAdapterPosition)
             }
             binding.editPerform.setOnClickListener {
-                onItemClicked(adapterPosition)
+                onItemClicked(bindingAdapterPosition)
             }
         }
 
@@ -68,11 +68,15 @@ class AccountViewItemAdapter (private val itemList: List<AccountViewObject>,
 
                  if(this.status == "1" ){
                       binding.status.text = "Active"
+                      binding.status.setTextColor(ContextCompat.getColor(context, R.color.white))
                       binding.status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_approved)
                  }
                  else{
                      binding.status.text = "Inactive"
-                     binding.status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_not_delete)
+                     binding.status.setTextColor(ContextCompat.getColor(context, R.color.white))
+                     binding.status.background = ContextCompat.getDrawable(context,
+                         R.drawable.item_shape_delete
+                     )
                  }
 
 

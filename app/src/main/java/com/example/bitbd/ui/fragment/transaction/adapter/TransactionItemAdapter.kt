@@ -31,7 +31,7 @@ private val onItemClicked: (position: Int) -> Unit,private val context: Context
 
         override fun onClick(p0: View?) {
 
-            onItemClicked(adapterPosition)
+            onItemClicked(bindingAdapterPosition)
 
         }
 
@@ -70,15 +70,18 @@ private val onItemClicked: (position: Int) -> Unit,private val context: Context
                 binding.Status.text = this.status
                 if(this.status == "Pending"){
                     binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_pending)
+                    binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
                 }
                 else if(this.status == "Approved"){
                     binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_approved)
+                    binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
                 }
 
                 else if(this.status == "Decline"){
                     binding.Status.background = ContextCompat.getDrawable(context,
                         R.drawable.item_shape_delete
                     )
+                    binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
                 }
                 // binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
             }

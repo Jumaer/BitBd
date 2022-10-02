@@ -93,6 +93,7 @@ class AffiliateFragment : Fragment() {
         binding.affiliateRecycle.adapter?.notifyDataSetChanged()
     }
 
+    @SuppressLint("LogNotTimber")
     private fun onAdapterItemClick(position: Int) {
 
         Log.d("Implement" , "Not yet for $position")

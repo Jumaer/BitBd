@@ -167,7 +167,11 @@ class ProfileFragment : Fragment() {
         val profileImageLoader = binding.animationView
         val urlProfileImage = BuildConfig.SERVER_URL + preference.getImageUrl()?.toString()
         BitBDUtil.loadImage(binding.profileImageView,profileImageLoader,urlProfileImage,requireContext())
-        binding.refCode.text = "Reference Code : "+ preference.getAffiliateCode()
+        if(preference.getAffiliate() == 1){
+            binding.refCode.text = "Reference Code : "+ preference.getAffiliateCode()
+        }
+        else binding.refCode.visibility = View.GONE
+
         binding.nameLayout.editText?.text = BitBDUtil.editable(preference.getName().toString())
         binding.phoneLayout.editText?.text = BitBDUtil.editable(preference.getMobileNumber().toString())
         binding.phoneLayout.editText?.inputType = InputType.TYPE_NULL

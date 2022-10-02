@@ -50,5 +50,8 @@ data class AffiliateObject(
 
     @SerializedName("updated_at")
     var updatedAt: String?,
+
+    @SerializedName("user")
+    var user: UserAffiliate?,
 )
 

@@ -34,11 +34,14 @@ class DepositItemAdapter (
         }
 
         override fun onClick(p0: View?) {
-            if(depositItemList[adapterPosition].status == "Approved"){
+            if(depositItemList[bindingAdapterPosition].status == "Decline"){
+                BitBDUtil.showMessage("Already Declined", INFO)
+            }
+            if(depositItemList[bindingAdapterPosition].status == "Approved"){
                 BitBDUtil.showMessage("Already Approved", INFO)
             }
             else{
-                onItemClicked(adapterPosition)
+                onItemClicked(bindingAdapterPosition)
             }
 
         }
@@ -78,16 +81,27 @@ class DepositItemAdapter (
                 binding.Amount.text = this.amount.toString()
                 binding.TrxAccNumber.text = this.vtrxAccount
                 binding.Status.text = this.status
-                if(this.status == "Pending"){
-                    binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_pending)
-                   //     binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
-                    binding.ActionPerform.background = ContextCompat.getDrawable(context, R.drawable.item_shape_delete)
-                }
-                else if(this.status == "Approved"){
-                    binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_approved)
-                    binding.ActionPerform.background = ContextCompat.getDrawable(context,
-                        R.drawable.item_shape_not_delete
-                    )
+                when (this.status) {
+                    "Pending" -> {
+                        binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_pending)
+                        binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
+                        binding.ActionPerform.background = ContextCompat.getDrawable(context, R.drawable.item_shape_delete)
+                    }
+                    "Approved" -> {
+                        binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_approved)
+                        binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
+                        binding.ActionPerform.background = ContextCompat.getDrawable(context,
+                            R.drawable.item_shape_not_delete
+
+                        )
+                    }
+                    "Decline" -> {
+                        binding.Status.background = ContextCompat.getDrawable(context, R.drawable.item_shape_delete)
+                        binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
+                        binding.ActionPerform.background = ContextCompat.getDrawable(context,
+                            R.drawable.item_shape_not_delete
+                        )
+                    }
                 }
                // binding.Status.setTextColor(ContextCompat.getColor(context, R.color.white))
             }

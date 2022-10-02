@@ -30,7 +30,7 @@ class AffiliateItemAdapter (private val itemList: List<AffiliateObject>,
 
         override fun onClick(p0: View?) {
 
-            onItemClicked(adapterPosition)
+            onItemClicked(bindingAdapterPosition)
 
         }
 
@@ -64,7 +64,7 @@ class AffiliateItemAdapter (private val itemList: List<AffiliateObject>,
 
                 binding.TrxType.text = this.trxType
                 binding.Amount.text = this.amount.toString()
-                binding.refUser.text = "User Id : ${this.userId}"
+                binding.refUser.text = this.user?.name.toString()
                 binding.Commission.text = this.refCommission.toString()
 
             }

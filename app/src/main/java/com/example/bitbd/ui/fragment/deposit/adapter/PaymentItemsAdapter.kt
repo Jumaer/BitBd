@@ -26,7 +26,7 @@ class PaymentItemsAdapter (
         }
 
         override fun onClick(p0: View?) {
-            onItemClicked(adapterPosition)
+            onItemClicked(bindingAdapterPosition)
         }
 
     }

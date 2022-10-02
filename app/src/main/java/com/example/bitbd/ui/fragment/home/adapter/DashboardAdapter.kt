@@ -23,7 +23,7 @@ private val onItemClicked: (position: Int) -> Unit, private val context: Context
         }
 
         override fun onClick(p0: View?) {
-            onItemClicked(adapterPosition)
+            onItemClicked(bindingAdapterPosition)
         }
 
     }
