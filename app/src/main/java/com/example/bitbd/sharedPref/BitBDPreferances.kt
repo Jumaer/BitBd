@@ -170,6 +170,14 @@ class BitBDPreferences(context: Context) {
         editor.apply()
     }
 
+    fun setRecallWithdraw(isChange : Boolean){
+        editor.putBoolean(RECALL_WITHDRAW, isChange)
+        editor.apply()
+    }
+    fun isNeedToRecall(): Boolean {
+        return preferences.getBoolean(RECALL_WITHDRAW, false)
+    }
+
     fun getAnyChangeAccount(): Boolean {
         return preferences.getBoolean(IS_LIST_UPDATED_ACCOUNT, false)
     }

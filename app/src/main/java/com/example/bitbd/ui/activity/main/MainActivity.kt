@@ -193,10 +193,23 @@ class MainActivity : BaseActivity() {
 //    }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        clearPref()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        clearPref()
+    }
 
 
-
-
+    private fun clearPref(){
+        preference?.setRecallWithdraw(false)
+        preference?.setAnyChangeWithdraw(false)
+        preference?.setAnyAccount(false)
+        preference?.setAnyChange(false)
+    }
 
     }
 

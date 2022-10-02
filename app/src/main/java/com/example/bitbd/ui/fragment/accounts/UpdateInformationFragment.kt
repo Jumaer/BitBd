@@ -97,6 +97,7 @@ class UpdateInformationFragment : Fragment() {
         viewModel.accountSubmit.observe(viewLifecycleOwner){
             if(it != null){
                 preferences.setAnyAccount(true)
+                preferences.setRecallWithdraw(true)
                 binding.typeLayout.editText?.text = BitBDUtil.editable("")
                 binding.trxAccountLayout.editText?.text = BitBDUtil.editable("")
                 binding.trxAccountNameLayout.editText?.text = BitBDUtil.editable("")

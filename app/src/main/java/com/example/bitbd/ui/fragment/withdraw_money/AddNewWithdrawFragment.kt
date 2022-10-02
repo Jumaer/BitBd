@@ -263,5 +263,14 @@ class AddNewWithdrawFragment : Fragment() {
         loading?.dismiss()
     }
 
+    override fun onResume() {
+        super.onResume()
 
+        if( preferences?.isNeedToRecall() == true){
+            preferences?.setRecallWithdraw(false)
+            lifecycleScope.launch {
+                slideshowViewModel?.withdrawAccountInfo(requireContext())
+            }
+        }
+    }
 }

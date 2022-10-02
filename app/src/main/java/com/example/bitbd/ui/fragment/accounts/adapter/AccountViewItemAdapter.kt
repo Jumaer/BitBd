@@ -59,7 +59,7 @@ class AccountViewItemAdapter (private val itemList: List<AccountViewObject>,
                  binding.name.text = this.name
                  binding.type.text = this.type
                  binding.accountNo.text = this.account
-                 if(this.branch == null){
+                 if(this.branch == null || this.branch == "null" ){
                      binding.branch.text = "N/A"
                  }
                  else{

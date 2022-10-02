@@ -89,6 +89,7 @@ class EditAccountActivity : BaseActivity() {
 
         viewModel.submitEdit.observe(this) {
             if (it != null) {
+                preferences.setRecallWithdraw(true)
                 preferences.setAnyAccount(true)
                 binding.typeLayout.editText?.text = BitBDUtil.editable("")
                 binding.trxAccountLayout.editText?.text = BitBDUtil.editable("")
